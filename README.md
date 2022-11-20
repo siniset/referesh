@@ -1,4 +1,4 @@
-# Ohjelmistotuotanto, Fall 2022
+# Ohjelmistotuotanto, Fall 2022, Group 4
 
 This is a project for Software Engineering course in the fall of 2022 at Helsinki University.
 
