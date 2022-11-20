@@ -28,5 +28,6 @@ __Work time tracking__
 |Ella     |    |    |    |    |       |
 |Mikko    |    |    |    |    |       |
 
-Maybe useful links:
+Useful links:
  * add here if found something useful
+ * https://ohjelmistotuotanto-hy.github.io/miniprojekti/
