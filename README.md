@@ -5,6 +5,8 @@ This is a project for Software Engineering course in the fall of 2022 at Helsink
 Project task:
   - Adding it here asap
 
+[Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
+
 
 __Project parts and DLs:__
 *
