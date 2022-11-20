@@ -31,3 +31,4 @@ __Work time tracking__
 Useful links:
  * add here if found something useful
  * https://ohjelmistotuotanto-hy.github.io/miniprojekti/
+ * https://docs.google.com/spreadsheets/d/13RzIZI2NFFuV0zdRjrrfoC-CrootK8AZNuHS571Wlxo/edit#gid=1
