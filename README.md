@@ -2,11 +2,7 @@
 
 This is a project for Software Engineering course in the fall of 2022 at Helsinki University.
 
-* [Project tasks](https://ohjelmistotuotanto-hy.github.io/speksi/)
-* [Grading](https://ohjelmistotuotanto-hy.github.io/miniprojektin_arvosteluperusteet/)
-
-
-[Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
+* [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
 
 
 __Dailys__
@@ -27,6 +23,8 @@ __Work time tracking__
 
 Useful links:
  * add here if found something useful
+ * [Project tasks](https://ohjelmistotuotanto-hy.github.io/speksi/)
+ * [Grading](https://ohjelmistotuotanto-hy.github.io/miniprojektin_arvosteluperusteet/)
  * https://ohjelmistotuotanto-hy.github.io/miniprojekti/
  * https://docs.google.com/spreadsheets/d/13RzIZI2NFFuV0zdRjrrfoC-CrootK8AZNuHS571Wlxo/edit#gid=1
 
