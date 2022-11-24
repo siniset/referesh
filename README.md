@@ -5,6 +5,9 @@ This is a project for Software Engineering course in the fall of 2022 at Helsink
 * [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
 
 
+__Sprint reviews__
+* Thursdays 16:30, B120
+
 __Dailys__
 * Thuesday 9.45
 * Friday 9.45
