@@ -2,8 +2,8 @@
 
 This is a project for Software Engineering course in the fall of 2022 at Helsinki University.
 
-[Project tasks](https://ohjelmistotuotanto-hy.github.io/speksi/)
-[Grading](https://ohjelmistotuotanto-hy.github.io/miniprojektin_arvosteluperusteet/)
+* [Project tasks](https://ohjelmistotuotanto-hy.github.io/speksi/)
+* [Grading](https://ohjelmistotuotanto-hy.github.io/miniprojektin_arvosteluperusteet/)
 
 
 [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
