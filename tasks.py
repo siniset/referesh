@@ -1,16 +1,20 @@
 from invoke import task
 
+
 @task
 def start(ctx):
     ctx.run("python3 -m app.app")
+
 
 @task
 def test(ctx):
     ctx.run("python3 -m pytest", pty=True)
 
+
 @task
 def lint(ctx):
     ctx.run("flake8", pty=True)
+
 
 @task
 def format(ctx):
