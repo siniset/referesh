@@ -6,7 +6,7 @@ def start(ctx):
 
 @task
 def test(ctx):
-    pass
+    ctx.run("python3 -m pytest", pty=True)
 
 @task
 def lint(ctx):

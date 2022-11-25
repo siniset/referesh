@@ -10,6 +10,7 @@ packages = [{include = "app"}, {include = "tests"}]
 python = "^3.10"
 invoke = "^1.7.3"
 flask = "^2.2.2"
+pytest = "^7.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
