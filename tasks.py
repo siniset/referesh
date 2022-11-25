@@ -2,7 +2,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    pass
+    ctx.run("python3 -m app.app")
 
 @task
 def test(ctx):
