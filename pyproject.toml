@@ -9,6 +9,7 @@ packages = [{include = "app"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 invoke = "^1.7.3"
+flask = "^2.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
