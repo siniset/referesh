@@ -10,6 +10,8 @@ packages = [{include = "app"}, {include = "tests"}]
 python = "^3.8.1"
 invoke = "^1.7.3"
 flask = "^2.2.2"
+flask-sqlalchemy = "^3.0.2"
+psycopg2 = "^2.9.5"
 
 
 [tool.poetry.group.dev.dependencies]
