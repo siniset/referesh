@@ -3,7 +3,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run("python3 -m app.app")
+    ctx.run("flask --app app.app:app run")
 
 
 @task
