@@ -13,7 +13,6 @@ def save():
         year = request.form["year"]
         publisher = request.form["publisher"]
 
-        #tässä tapahtuu sitten save_reference moduulin funktion kutsu
-        #ja talletus tapahtuu
+        #save_reference moduulin funktion kutsu --> talletus tietokantaan
 
     return redirect("/")
