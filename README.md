@@ -21,7 +21,7 @@ __Work time tracking__
 |Teemu    |    |    |    |    |       |
 |Heikki   |    |    |    |    |       |
 |Nuutti   | 1  |    |    |    |       |
-|Ella     |    |    |    |    |       |
+|Ella     | 4  |    |    |    |       |
 |Mikko    |    |    |    |    |       |
 
 Useful links:
