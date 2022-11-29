@@ -12,8 +12,18 @@ def test(ctx):
 
 
 @task
+def test_win(ctx):
+    ctx.run("python3 -m pytest", pty=False)
+
+
+@task
 def lint(ctx):
     ctx.run("flake8", pty=True)
+
+
+@task
+def lint_win(ctx):
+    ctx.run("flake8", pty=False)
 
 
 @task
