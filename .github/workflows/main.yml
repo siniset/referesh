@@ -23,8 +23,8 @@ jobs:
       - name: Run tests
         run: poetry run coverage run --branch -m pytest  
       - name: Coverage report
-        run: poetry run coverage xml
+        run: poetry run invoke coverage_report
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
       - name: Analysing the code with pylint
-        run: poetry run pylint src
+        run: poetry run invoke lint
