@@ -25,7 +25,7 @@ __Work time tracking__
 |Juho     |         |         |         |       |
 |Teemu    |         |         |         |       |
 |Heikki   | 2       |         |         |       |
-|Nuutti   | 5       |         |         |       |
+|Nuutti   | 6       |         |         |       |
 |Ella     | 6       |         |         |       |
 
 
