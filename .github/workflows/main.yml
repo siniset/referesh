@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run tests
-        run: poetry run coverage run --branch -m pytest  
-      - name: Coverage report
-        run: poetry run invoke coverage_report
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+        run: poetry run invoke test  
       - name: Analysing the code with pylint
         run: poetry run invoke lint
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
