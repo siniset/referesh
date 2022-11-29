@@ -9,20 +9,20 @@ __Sprint reviews__
 * Thursdays 16:30, B120
 
 __Dailys__
-* Thuesday 9.45
+* Tuesday 9.45
 * Friday 9.45
 
 
 __Work time tracking__
 
-|         | 47 | 48 | 49 | 50 | total |
-|---------|:--:|:--:|:--:|:--:|------:|
-|Juho     |    |    |    |    |       |
-|Teemu    |    |    |    |    |       |
-|Heikki   | 1  | 1  |    |    |       |
-|Nuutti   | 1  | 3  |    |    |       |
-|Ella     | 1  | 4  |    |    |       |
-|Mikko    |    |    |    |    |       |
+|         | Sprint1 | Sprint2 | Sprint3 | total |
+|---------|:-------:|:-------:|:-------:|------:|
+|Juho     |         |         |         |       |
+|Teemu    |         |         |         |       |
+|Heikki   | 2       |         |         |       |
+|Nuutti   | 4       |         |         |       |
+|Ella     | 5       |         |         |       |
+
 
 Useful links:
  * add here if found something useful
@@ -34,7 +34,7 @@ Useful links:
 
 __Library room reservation, if you want to come:__
 * Monday  8:00 - 10.00, G103g
-* Thuesday 8:00 - 10.00, G103g
+* Tuesday 8:00 - 10.00, G103g
 * Friday 8:00 - 10.00, G103g
 
 (The last reserved instance for G103g for us is at Friday 16.12.)
