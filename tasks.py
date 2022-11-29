@@ -20,9 +20,11 @@ def lint(ctx):
 def format(ctx):
     ctx.run("autopep8 --aggressive --in-place --recursive app tests")
 
+
 @task
 def coverage(ctx):
     ctx.run("coverage run --branch -m pytest", pty=True)
+
 
 @task(coverage)
 def coverage_report(ctx):
