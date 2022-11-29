@@ -17,3 +17,5 @@ def save():
 
         if save_reference.save(type, author, book_name, year, publisher):
             return redirect("/")
+        else:
+            return render_template("error.html")
