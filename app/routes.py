@@ -1,11 +1,13 @@
 from flask import render_template, request, redirect
-from app.app import app
+from app.app import app, db
 from app import save_reference
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    res = db.session.execute("SELECT * FROM fields WHERE name='author' OR name='title'")
+    references = res.fetchall()
+    return render_template("index.html", references=references)
 
 
 @app.route("/save", methods=["POST"])
