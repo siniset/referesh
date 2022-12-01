@@ -5,10 +5,13 @@ from app import save_reference
 
 @app.route("/")
 def index():
-    res = db.session.execute("SELECT * FROM fields WHERE name='author' OR name='title'")
+    res = db.session.execute("SELECT * FROM fields"
+                             " WHERE name='author' OR name='title'")
     references = res.fetchall()
     return render_template("index.html", references=references)
-# Need to combine results from same ids, GET route func for clean code, add del() route
+# Need to combine results from same ids,
+# GET route func for clean code, add del() route
+
 
 @app.route("/save", methods=["POST"])
 def save():
