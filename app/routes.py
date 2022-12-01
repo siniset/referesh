@@ -1,13 +1,11 @@
 from flask import render_template, request, redirect
-from app.app import app, db
-from app import save_reference
+from app.app import app
+from app import save_reference, get_references
 
 
 @app.route("/")
 def index():
-    res = db.session.execute("SELECT * FROM fields"
-                             " WHERE name='author' OR name='title'")
-    references = res.fetchall()
+    references = get_references.get_all()
     return render_template("index.html", references=references)
 # Need to combine results from same ids,
 # GET route func for clean code, add del() route
