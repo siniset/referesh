@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect
 from app.app import app
-from app import save_reference, get_references
+from app import save_reference, get_references, delete_reference
 
 
 @app.route("/")
@@ -21,6 +21,17 @@ def save():
         publisher = request.form["publisher"]
 
         if save_reference.save(type, author, book_name, year, publisher):
+            return redirect("/")
+        else:
+            return render_template("error.html")
+
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    if request.method == "POST":
+        id = request.form["id"]
+
+        if delete_reference.delete(id):
             return redirect("/")
         else:
             return render_template("error.html")
