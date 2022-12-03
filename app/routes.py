@@ -19,8 +19,9 @@ def save():
         book_name = request.form["name"]
         year = request.form["year"]
         publisher = request.form["publisher"]
+        reference_name = request.form["reference_name"]
 
-        if save_reference.save(type, author, book_name, year, publisher):
+        if save_reference.save(type, author, book_name, year, publisher, reference_name):
             return redirect("/")
         else:
             return render_template("error.html")
