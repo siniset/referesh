@@ -1,14 +1,13 @@
 from flask import render_template, request, redirect
 from app.app import app
 from app import save_reference, get_references, delete_reference
+from app.controllers import reference_controller
 
 
 @app.route("/")
 def index():
-    references = get_references.get_all()
+    references = reference_controller.get_titles()
     return render_template("index.html", references=references)
-# Need to combine results from same ids,
-# GET route func for clean code, add del() route
 
 
 @app.route("/save", methods=["POST"])
