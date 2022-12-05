@@ -1,4 +1,4 @@
-INSERT INTO reference_entries (type, name, created_at) VALUES
+INSERT INTO reference (type, name, created_at) VALUES
   ('book', 'GSW18', current_timestamp),
   ('book', 'KS2018', current_timestamp),
   ('book', 'DSST2018', current_timestamp),
@@ -181,7 +181,7 @@ INSERT INTO reference_entries (type, name, created_at) VALUES
   ('book', 'S90', current_timestamp),
   ('book', 'S88', current_timestamp);
 
-INSERT INTO fields (reference_entry, name, content) VALUES
+INSERT INTO field (reference_id, name, content) VALUES
   (1, 'author', 'S.N.Gomes and A.M.Stuart and M-T.Wolfram'),
   (1, 'title', 'Parameter Estimation for Macroscopic Pedestrian Dynamics Models from Microscopic Data'),
   (1, 'note', 'submitted'),
