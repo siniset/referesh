@@ -19,7 +19,8 @@ def save_book_fields(author, book_name, year, publisher, id):
     return True
 
 
-def save(type, author=None, book_name=None, year=None, publisher=None, reference_name=None):
+def save(type, author=None, book_name=None, year=None,
+         publisher=None, reference_name=None):
 
     try:
         sql = """INSERT INTO reference_entries (name, type, created_at)
