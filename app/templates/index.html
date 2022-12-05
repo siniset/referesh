@@ -2,6 +2,7 @@
 
 <html></html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
         <title>Viitesovellus</title>
     </head>
@@ -15,7 +16,7 @@
             <p class="box-title">Lisää viite</p>
 
             <form class="vertical form v-gap-xl" action="/save" method="POST">
-                <div class="row h-gap-lg">
+                <div class="form-row row h-gap-lg">
                     <div class="span-6 vertical flex v-gap-md">
                         <label for="reference-name">Nimi</label>
                         <input name="name" id="reference-name" placeholder="Nimi" type="text" class="text-field" />
@@ -30,31 +31,31 @@
                 </div>
 
 
-                <div class="row h-gap-lg">
+                <div class="form-row row h-gap-lg">
                     <div class="span-6 vertical flex v-gap-md">
                         <label for="reference-title">Julkaisun nimi</label>
-                        <input name="name" id="reference-title" placeholder="Julkaisun nimi" type="text" class="text-field" />
+                        <input name="title" id="reference-title" placeholder="Julkaisun nimi" type="text" class="text-field" />
                     </div>
                     <div class="span-6 vertical flex v-gap-md">
                         <label for="reference-author">Tekijä</label>
-                        <input name="name" id="reference-author" placeholder="Tekijä" type="text" class="text-field" />
+                        <input name="author" id="reference-author" placeholder="Tekijä" type="text" class="text-field" />
                     </div>
                 </div>
 
 
-                <div class="row h-gap-lg">
+                <div class="form-row row h-gap-lg">
                     <div class="span-6 vertical flex v-gap-md">
                         <label for="reference-year">Julkaisuvuosi</label>
-                        <input name="name" id="reference-year" placeholder="Julkaisuvuosi" type="text" class="text-field" />
+                        <input name="year" id="reference-year" placeholder="Julkaisuvuosi" type="text" class="text-field" />
                     </div>
                     <div class="span-6 vertical flex v-gap-md">
                         <label for="reference-publisher">Julkaisija</label>
-                        <input name="name" id="reference-publisher" placeholder="Julkaisija" type="text" class="text-field" />
+                        <input name="publisher" id="reference-publisher" placeholder="Julkaisija" type="text" class="text-field" />
                     </div>
                 </div>
 
                 <div>
-                    <input id="button" type="submit" class="span-12 button" value="Lisää" />
+                    <input id="button" type="submit" class="span-12 button text-bold" value="Lisää" />
                 </div>
             </form>
         </section>
@@ -63,17 +64,35 @@
             <p class="box-title">Viitteet</p>
 
             <div class="reference-list vertical flex">
-                {% for reference in references %}
-                <div class="reference-entry">
-                    <div class="flex h-gap-lg">
-                        <p class="reference-name">{{reference.name}}</p>
-                        <p class="reference-title">{{reference.title}}</p>
-                    </div>
 
-                    <a href={{"/delete/" ~ reference.id}} class="button">Poista</a>
-                </div>
+                {% for reference in references %}
+                <div onclick={{"toggleReferenceView(" ~ reference.id ~ ")"}}
+                    class="reference" data-action="toggle-reference" data-reference-id={{reference.id}}>
+
+                        <div class="row v-centered reference-header">
+                            <div class="column h-gap-md reference-info v-gap-md">
+                                <p class="reference-name">{{reference.name}}</p>
+                                <p class="reference-title">{{reference.title}}</p>
+                            </div>
+
+                            <div class="column reference-button">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" fill="currentColor"
+                                                            class="bi bi-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1
+                                    .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0
+                                    1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
                 {% endfor %}
+
             </div>
         </section>
+
+        <script defer src={{ url_for('static', filename='index.js') }}></script>
     </body>
 </html>
