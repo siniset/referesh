@@ -8,6 +8,9 @@ This is a project for Software Engineering course in the fall of 2022 at Helsink
 
 * [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
 
+Definition of Done:
+Toteutetun User storyn toiminnallisuus on ohjelmoitu ja viety tuotantoon. Testikattavuus on 90%, testitapaukset ovat
+mielekkäitä. Testit menevät läpi. Pylint ei havaitse koodissa virheitä.
 
 __Sprint reviews__
 * meet up at 16:00 to review what to present
