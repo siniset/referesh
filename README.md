@@ -22,7 +22,7 @@ __Work time tracking__
 
 |         | Sprint1 | Sprint2 | Sprint3 | total |
 |---------|:-------:|:-------:|:-------:|------:|
-|Juho     | 6       |         |         |       |
+|Juho     | 6       |   2     |         |       |
 |Teemu    |         |         |         |       |
 |Heikki   | 6       |   2     |         |       |
 |Nuutti   | 6       |   4     |         |       |
