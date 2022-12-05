@@ -1,6 +1,5 @@
-from flask import render_template, request, redirect, jsonify, abort
+from flask import render_template, request, redirect, abort
 from app.app import app
-from app import save_reference, get_references, delete_reference
 from app.controllers import reference_controller
 
 
