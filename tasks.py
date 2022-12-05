@@ -3,7 +3,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    ctx.run("flask --app app.app:app --debug run")
+    ctx.run("flask --app app.app:app --debug run --host=0.0.0.0")
 
 
 @task
