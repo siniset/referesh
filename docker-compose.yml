@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  runner:
+    build: .
+    depends_on:
+      - database
+    networks:
+      - ohtu-testing
+
+  database:
+    image: postgres:latest
+    restart: always
+    networks:
+      - ohtu-testing
+    environment:
+      - POSTGRES_PASSWORD=ohtu
+
+networks:
+  ohtu-testing:
