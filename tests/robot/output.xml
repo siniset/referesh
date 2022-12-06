@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.1 (Python 3.8.10 on linux)" generated="20221206 14:59:47.199" rpa="false" schemaversion="3">
+<suite id="s1" name="Robot Tests" source="/home/korkella/projektit/Ohtu_2022/tests/robot/robot_tests">
+<suite id="s1-s1" name="Reference Controller" source="/home/korkella/projektit/Ohtu_2022/tests/robot/robot_tests/reference_controller.robot">
+<kw name="Open And Configure Browser" library="resource" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>browser=${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221206 14:59:47.528" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20221206 14:59:47.528" endtime="20221206 14:59:48.402"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20221206 14:59:48.402" endtime="20221206 14:59:48.524"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20221206 14:59:48.524" endtime="20221206 14:59:48.524"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:47.528" endtime="20221206 14:59:48.525"/>
+</kw>
+<test id="s1-s1-t1" name="Save Book Reference" line="8">
+<kw name="Go To Main Page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${HOME URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20221206 14:59:48.526" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20221206 14:59:48.526" endtime="20221206 14:59:48.826"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:48.526" endtime="20221206 14:59:48.826"/>
+</kw>
+<kw name="Set Reference Type">
+<arg>Kirja</arg>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>reference-type</arg>
+<arg>${reference-type}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20221206 14:59:48.831" level="INFO">Selecting options from selection list 'reference-type' by label Kirja.</msg>
+<status status="PASS" starttime="20221206 14:59:48.828" endtime="20221206 14:59:49.966"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:48.827" endtime="20221206 14:59:49.966"/>
+</kw>
+<kw name="Set Reference Name">
+<arg>SDJLSAFAS</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-name</arg>
+<arg>${reference-name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:49.970" level="INFO">Typing text 'SDJLSAFAS' into text field 'reference-name'.</msg>
+<status status="PASS" starttime="20221206 14:59:49.968" endtime="20221206 14:59:50.719"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:49.967" endtime="20221206 14:59:50.719"/>
+</kw>
+<kw name="Set Reference Title">
+<arg>Kirjanen</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-title</arg>
+<arg>${reference-title}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:50.723" level="INFO">Typing text 'Kirjanen' into text field 'reference-title'.</msg>
+<status status="PASS" starttime="20221206 14:59:50.721" endtime="20221206 14:59:51.554"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:50.720" endtime="20221206 14:59:51.555"/>
+</kw>
+<kw name="Set Reference Author">
+<arg>Leevi</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-author</arg>
+<arg>${reference-author}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:51.559" level="INFO">Typing text 'Leevi' into text field 'reference-author'.</msg>
+<status status="PASS" starttime="20221206 14:59:51.557" endtime="20221206 14:59:52.295"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:51.556" endtime="20221206 14:59:52.295"/>
+</kw>
+<kw name="Set Reference Year">
+<arg>2005</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-year</arg>
+<arg>${reference-year}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:52.299" level="INFO">Typing text '2005' into text field 'reference-year'.</msg>
+<status status="PASS" starttime="20221206 14:59:52.297" endtime="20221206 14:59:53.096"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:52.296" endtime="20221206 14:59:53.096"/>
+</kw>
+<kw name="Set Reference Publisher">
+<arg>Tammi</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-publisher</arg>
+<arg>${reference-publisher}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:53.100" level="INFO">Typing text 'Tammi' into text field 'reference-publisher'.</msg>
+<status status="PASS" starttime="20221206 14:59:53.099" endtime="20221206 14:59:53.904"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:53.097" endtime="20221206 14:59:53.905"/>
+</kw>
+<kw name="Submit Credentials">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:53.908" level="INFO">Clicking button 'button'.</msg>
+<status status="PASS" starttime="20221206 14:59:53.906" endtime="20221206 14:59:54.628"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:53.905" endtime="20221206 14:59:54.629"/>
+</kw>
+<kw name="Save Reference Should Succeed">
+<kw name="Main Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Viitesovellus</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221206 14:59:54.848" level="INFO">Page title is 'Viitesovellus'.</msg>
+<status status="PASS" starttime="20221206 14:59:54.632" endtime="20221206 14:59:54.849"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:54.631" endtime="20221206 14:59:54.849"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:54.629" endtime="20221206 14:59:54.850"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:48.525" endtime="20221206 14:59:54.851"/>
+</test>
+<test id="s1-s1-t2" name="Save Article Reference" line="19">
+<kw name="Go To Main Page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${HOME URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20221206 14:59:54.856" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20221206 14:59:54.855" endtime="20221206 14:59:55.111"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:54.854" endtime="20221206 14:59:55.112"/>
+</kw>
+<kw name="Set Reference Type">
+<arg>Artikkeli</arg>
+<kw name="Select From List By Label" library="SeleniumLibrary">
+<arg>reference-type</arg>
+<arg>${reference-type}</arg>
+<doc>Selects options from selection list ``locator`` by ``labels``.</doc>
+<msg timestamp="20221206 14:59:55.117" level="INFO">Selecting options from selection list 'reference-type' by label Artikkeli.</msg>
+<status status="PASS" starttime="20221206 14:59:55.114" endtime="20221206 14:59:56.725"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:55.113" endtime="20221206 14:59:56.726"/>
+</kw>
+<kw name="Set Reference Name">
+<arg>SDJLSAFAS</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-name</arg>
+<arg>${reference-name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:56.729" level="INFO">Typing text 'SDJLSAFAS' into text field 'reference-name'.</msg>
+<status status="PASS" starttime="20221206 14:59:56.727" endtime="20221206 14:59:57.531"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:56.726" endtime="20221206 14:59:57.532"/>
+</kw>
+<kw name="Set Reference Title">
+<arg>Kirjanen</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-title</arg>
+<arg>${reference-title}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:57.535" level="INFO">Typing text 'Kirjanen' into text field 'reference-title'.</msg>
+<status status="PASS" starttime="20221206 14:59:57.533" endtime="20221206 14:59:58.318"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:57.532" endtime="20221206 14:59:58.319"/>
+</kw>
+<kw name="Set Reference Author">
+<arg>Leevi</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-author</arg>
+<arg>${reference-author}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:58.323" level="INFO">Typing text 'Leevi' into text field 'reference-author'.</msg>
+<status status="PASS" starttime="20221206 14:59:58.321" endtime="20221206 14:59:59.136"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:58.320" endtime="20221206 14:59:59.136"/>
+</kw>
+<kw name="Set Reference Year">
+<arg>2005</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-year</arg>
+<arg>${reference-year}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:59.140" level="INFO">Typing text '2005' into text field 'reference-year'.</msg>
+<status status="PASS" starttime="20221206 14:59:59.138" endtime="20221206 14:59:59.953"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:59.137" endtime="20221206 14:59:59.954"/>
+</kw>
+<kw name="Set Reference Publisher">
+<arg>Tammi</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>reference-publisher</arg>
+<arg>${reference-publisher}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221206 14:59:59.957" level="INFO">Typing text 'Tammi' into text field 'reference-publisher'.</msg>
+<status status="PASS" starttime="20221206 14:59:59.955" endtime="20221206 15:00:00.743"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:59.954" endtime="20221206 15:00:00.744"/>
+</kw>
+<kw name="Submit Credentials">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20221206 15:00:00.748" level="INFO">Clicking button 'button'.</msg>
+<status status="PASS" starttime="20221206 15:00:00.746" endtime="20221206 15:00:01.503"/>
+</kw>
+<status status="PASS" starttime="20221206 15:00:00.745" endtime="20221206 15:00:01.504"/>
+</kw>
+<kw name="Save Reference Should Succeed">
+<kw name="Main Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Viitesovellus</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221206 15:00:01.724" level="INFO">Page title is 'Viitesovellus'.</msg>
+<status status="PASS" starttime="20221206 15:00:01.508" endtime="20221206 15:00:01.724"/>
+</kw>
+<status status="PASS" starttime="20221206 15:00:01.506" endtime="20221206 15:00:01.725"/>
+</kw>
+<status status="PASS" starttime="20221206 15:00:01.505" endtime="20221206 15:00:01.726"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:54.853" endtime="20221206 15:00:01.727"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20221206 15:00:01.729" endtime="20221206 15:00:01.986"/>
+</kw>
+<status status="PASS" starttime="20221206 14:59:47.215" endtime="20221206 15:00:01.986"/>
+</suite>
+<status status="PASS" starttime="20221206 14:59:47.200" endtime="20221206 15:00:01.988"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Robot Tests">Robot Tests</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1" name="Reference Controller">Robot Tests.Reference Controller</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
