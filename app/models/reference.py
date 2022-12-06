@@ -1,17 +1,19 @@
-from sqlalchemy import func
-from app.app import db
+from sqlalchemy import Column, Integer, Text, DateTime, func
+from sqlalchemy.orm import relationship
+from app.db import Base
 
 
-class Reference(db.Model):
-    id = db.Column(
-        db.Integer,
+class Reference(Base):
+    __tablename__ = "Reference"
+    id = Column(
+        Integer,
         autoincrement=True,
         unique=True,
         primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    type = db.Column(db.Text, nullable=False)
-    created_at = db.Column(
-        db.DateTime(
+    name = Column(Text, nullable=False)
+    type = Column(Text, nullable=False)
+    created_at = Column(
+        DateTime(
             timezone=True),
         server_default=func.now())
-    fields = db.relationship("Field")
+    fields = relationship("Field")
