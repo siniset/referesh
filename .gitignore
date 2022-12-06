@@ -8,3 +8,6 @@ htmlcov/
 venv
 
 *.png
+report.html
+output.xml
+log.html
