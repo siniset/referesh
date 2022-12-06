@@ -1,14 +1,17 @@
-from app.app import db
+from app import db
 from app.models.reference import Reference
 from app.models.field import Field
+from sqlalchemy import select, delete
 
 
-def get_one(id):
-    return Reference.query.get(id)
+def get_by_id(id):
+    return db.session.execute(
+        select(Reference).where(Reference.id == id)
+    ).scalar_one()
 
 
 def get_all():
-    return Reference.query.all()
+    return db.session.execute(select(Reference)).all()
 
 
 def get_titles():
@@ -18,6 +21,11 @@ def get_titles():
 
 
 def create(name, type, fields={}):
+    if len(name) == 0:
+        raise ValueError("Name is invalid")
+    if len(type) == 0:
+        raise ValueError("Type is unknown")
+
     reference = Reference(name=name, type=type)
 
     for name, content in fields.items():
@@ -28,5 +36,5 @@ def create(name, type, fields={}):
 
 
 def delete_by_id(id):
-    db.session.execute(db.delete(Reference).where(Reference.id == id))
+    db.session.execute(delete(Reference).where(Reference.id == id))
     db.session.commit()
