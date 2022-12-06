@@ -17,6 +17,21 @@ def test_win(ctx):
 
 
 @task
+def run_test_server(ctx):
+    ctx.run("sudo docker run --name ohtu-test-runner -p 5432:5432 -e POSTGRES_PASSWORD=ohtu -d postgres")
+
+
+@task
+def start_test_server(ctx):
+    ctx.run("sudo docker start ohtu-test-runner")
+
+
+@task
+def stop_test_server(ctx):
+    ctx.run("sudo docker stop ohtu-test-runner")
+
+
+@task
 def lint(ctx):
     ctx.run("flake8", pty=True)
 
