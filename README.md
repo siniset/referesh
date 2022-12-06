@@ -25,7 +25,7 @@ __Work time tracking__
 |Juho     | 6       |   2     |         |       |
 |Teemu    |         |         |         |       |
 |Heikki   | 6       |   2     |         |       |
-|Nuutti   | 6       |   4     |         |       |
+|Nuutti   | 6       |   6     |         |       |
 |Ella     | 6       |   1     |         |       |
 
 
@@ -43,3 +43,35 @@ __Library room reservation, if you want to come:__
 * Friday 8:00 - 10.00, G103g
 
 (The last reserved instance for G103g for us is at Friday 16.12.)
+
+## Instructions
+
+### Testing
+
+Our objective is to achieve the 90% test coverage we have agreed upon.
+Thus we are aiming at reasonable tests that bring concrete value to our workflow. Currently we are working on unit tests with Pytest and test automation with
+Robot Framework. Testing infrastructure is simple and easy to use; there's hardly any direct monipulation of databases and tables by hand, and database's content
+is cleared and schema is re-created between test units.
+
+#### General commands
+
+* `invoke test`
+  * Run project's tests with pytest. Requires a reachable postgres database.
+
+#### Testing database
+
+__docker-compose__
+
+Run `docker-compose up --build` to build containers and run the tests. First run may take a little longer as all required packages and dependencies must be downloaded.
+After tests are run, the runner can be quit by pressing Ctrl-C. Runner returns a plain old Unix status code where zero signifies a successful and non-zero an unsuccessful test run.
+
+__Manual orchestration__
+\\\
+  Manual orchestration requires taking care of the test database. You may use a local postgres instance and create a new database for the test runner, or use the existing invoke tasks for managing the server.
+
+  * `invoke run_test_server`
+    * Create a new test server instance if there isn't already another one.
+  * `invoke start_test_server`
+    * Start test server if one exists and is not running.
+  * `invoke stop_test_server`
+    * Stop test server container if one exists and is running.
