@@ -53,10 +53,12 @@ Thus we are aiming at reasonable tests that bring concrete value to our workflow
 Robot Framework. Testing infrastructure is simple and easy to use; there's hardly any direct monipulation of databases and tables by hand, and database's content
 is cleared and schema is re-created between test units.
 
-#### General commands
+#### Usage
 
 * `invoke test`
   * Run project's tests with pytest. Requires a reachable postgres database.
+
+Note that testing of this application requires setting `TEST_DATABASE_URL` environment variable containing URI of the test databases.
 
 #### Testing database
 
