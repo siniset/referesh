@@ -15,19 +15,26 @@ Save Book Reference
     Submit Credentials
     Save Reference Should Succeed
 
-*** Test Cases ***
 Save Article Reference
     Set Reference Type  Artikkeli
-    Set Reference Name  SDJLSAFAS
-    Set Reference Title  Kirjanen
-    Set Reference Author  Leevi
-    Set Reference Year  2005
-    Set Reference Publisher  Tammi
+    Set Reference Name  TRLKHJSOFK
+    Set Reference Title  Artikkelinen
+    Set Reference Author  Ulla
+    Set Reference Year  2011
+    Set Reference Publisher  Wsoy
     Submit Credentials
     Save Reference Should Succeed
 
+Delete Reference
+    Show Reference
+    Click Delete
+    Main Page Should Be Open
+
 *** Keywords ***
 Save Reference Should Succeed
+    Main Page Should Be Open
+
+Delete Reference Should Succeed
     Main Page Should Be Open
 
 Submit Credentials
@@ -56,3 +63,9 @@ Set Reference Year
 Set Reference Publisher
     [Arguments]  ${reference-publisher}
     Input Text  reference-publisher  ${reference-publisher}
+
+Show Reference
+    Click Element  xpath:/html/body/section[2]/div/div[1]
+
+CLick Delete
+    Click Link  xpath:/html/body/section[2]/div/div[1]/div[2]/a

@@ -5,7 +5,7 @@ Library  app/controllers/reference_controller.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
-${DELAY}  0.2 seconds
+${DELAY}  0.5 seconds
 ${HOME URL}  http://${SERVER}
 
 *** Keywords ***
