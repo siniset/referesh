@@ -3,6 +3,7 @@ from dotenv import find_dotenv, load_dotenv
 
 load_dotenv(find_dotenv())
 
+
 class Config:
     FLASK_ENV = environ.get("mode") or "production"
     DATABASE_URL = environ.get("DATABASE_URL")
