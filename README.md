@@ -42,4 +42,4 @@ __Library room reservation, if you want to come:__
 * Tuesday 8:00 - 10.00, G103g
 * Friday 8:00 - 10.00, G103g
 
-(The last reserved instance for G103g for us is at Friday 16.12.)
+(The last reserved instance for G103g for us is at Friday 16.12.2022)
