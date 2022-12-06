@@ -1,17 +1,20 @@
-from app.app import db
+from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, func
+from sqlalchemy.orm import relationship
+from app.db import Base
 
 
-class Field(db.Model):
-    id = db.Column(
-        db.Integer,
+class Field(Base):
+    __tablename__ = "Field"
+    id = Column(
+        Integer,
         autoincrement=True,
         unique=True,
         primary_key=True)
-    name = db.Column(db.Text, nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    reference_id = db.Column(
-        db.Integer,
-        db.ForeignKey(
-            "reference.id",
+    name = Column(Text, nullable=False)
+    content = Column(Text, nullable=False)
+    reference_id = Column(
+        Integer,
+        ForeignKey(
+            "Reference.id",
             ondelete="CASCADE"),
         nullable=False)

@@ -11,7 +11,7 @@ def index():
 
 @app.route("/references/<id>")
 def reference(id):
-    reference = reference_controller.get_one(id)
+    reference = reference_controller.get_by_id(id)
 
     fields = {}
     for field in reference.fields:
