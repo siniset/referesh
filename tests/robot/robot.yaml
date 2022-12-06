@@ -1,0 +1,9 @@
+tasks:
+  Run Python:
+    shell: python tasks.py
+
+artifactsDir: output
+PATH:
+  - .
+PYTHONPATH:
+  - .
