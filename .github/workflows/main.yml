@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
@@ -24,7 +25,7 @@ jobs:
       - name: Run unit tests
         run: docker-compose up --build -d
 
-      # - name: Coverage report
-      #   run: poetry run coverage xml
-      # - name: Coverage report to Codecov
-      #   run: bash <(curl -s https://codecov.io/bash)
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
