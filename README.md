@@ -1,5 +1,5 @@
 ![GHA workflow badge](https://github.com/hnenonen/Ohtu_2022/workflows/CI/badge.svg)
-[![codecov](https://codecov.io/gh/hnenonen/Ohtu_2022/branch/main/graph/badge.svg?token=0902d546-2d3a-4f58-8228-4ad52ad2f446)](https://codecov.io/gh/hnenonen/Ohtu_2022)
+[![codecov](https://codecov.io/gh/JVS23/Ohtu_2022/branch/main/graph/badge.svg?token=303ee51c-5af2-4719-ba67-b3888539939f)](https://codecov.io/gh/JVS23/Ohtu_2022)
 
 
 # Ohjelmistotuotanto, Fall 2022, Group 4
