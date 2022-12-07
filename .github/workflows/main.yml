@@ -20,8 +20,11 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
-      - name: Run tests
-        run: poetry run invoke test  
+
+      - uses: actions/checkout@v2
+      - name: Run unit tests
+        run: docker-compose up --build -d
+
       - name: Analysing the code with pylint
         run: poetry run invoke lint
       - name: Coverage report
