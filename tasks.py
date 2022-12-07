@@ -13,7 +13,8 @@ def test(ctx):
 
 @task
 def robot_test(ctx):
-    ctx.run("BROWSER=headlesschrome SERVER=localhost:5000 robot tests/robot/robot_tests", pty=True)
+    ctx.run("""BROWSER=headlesschrome SERVER=localhost:5000
+        robot tests/robot/robot_tests""", pty=True)
 
 
 @task
@@ -23,7 +24,8 @@ def test_win(ctx):
 
 @task
 def run_test_server(ctx):
-    ctx.run("sudo docker run --name ohtu-test-runner -p 5432:5432 -e POSTGRES_PASSWORD=ohtu -d postgres")
+    ctx.run("""sudo docker run --name ohtu-test-runner -p 5432:5432
+        -e POSTGRES_PASSWORD=ohtu -d postgres""")
 
 
 @task
