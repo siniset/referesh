@@ -20,19 +20,8 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
-
       - name: Run tests
-        uses: isbang/compose-action@v1.4.1
-        with:
-          compose-file: "./docker-compose.yml"
-          down-flags: "--volumes"
-          services: |
-            runner
-            database
-
         run: poetry run invoke test  
-
-
       - name: Analysing the code with pylint
         run: poetry run invoke lint
       - name: Coverage report
