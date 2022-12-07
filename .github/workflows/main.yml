@@ -20,11 +20,11 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
-      - name: Run tests
-        run: poetry run invoke test  
-      - name: Analysing the code with pylint
-        run: poetry run invoke lint
-      - name: Coverage report
-        run: poetry run coverage xml
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+
+      - name: Run unit tests
+        run: docker-compose up --build -d
+
+      # - name: Coverage report
+      #   run: poetry run coverage xml
+      # - name: Coverage report to Codecov
+      #   run: bash <(curl -s https://codecov.io/bash)

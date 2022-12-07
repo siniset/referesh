@@ -1,2 +1,0 @@
-def testaus():
-    print("hei")
