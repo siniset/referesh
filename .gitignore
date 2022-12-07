@@ -3,6 +3,7 @@ __pycache__/
 
 htmlcov/
 .coverage
+coverage.xml
 
 .env
 venv
