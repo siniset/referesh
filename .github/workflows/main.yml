@@ -25,7 +25,10 @@ jobs:
       - name: Run unit tests
         run: docker-compose up --build -d
 
+      - name: Coverage
+        run: poetry run coverage run -m pytest
+
       - name: Coverage report
         run: poetry run coverage xml
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+      # - name: Coverage report to Codecov
+      #   run: bash <(curl -s https://codecov.io/bash)
