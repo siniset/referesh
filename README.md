@@ -12,7 +12,7 @@ __Definition of Done__
 
 Toteutetun User storyn toiminnallisuus on ohjelmoitu ja viety tuotantoon. 
 Testikattavuus on 90%, testitapaukset ovat mielekkäitä. 
-Testit menevät läpi. Pylint ei havaitse koodissa virheitä.
+Testit menevät läpi. Pylint ei havaitse koodissa virheitä. 
 
 __Sprint reviews__
 * meet up at 16:00 to review what to present
