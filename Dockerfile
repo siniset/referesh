@@ -10,4 +10,5 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-root
 COPY . .
 
-CMD ["poetry", "run", "invoke", "test"]
+# CMD ["poetry", "run", "invoke", "test"]
+CMD "./run-tests"
