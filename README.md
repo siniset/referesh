@@ -22,18 +22,6 @@ __Dailys__
 * Tuesday 9.45
 * Friday 9.45
 
-
-__Work time tracking__
-
-|         | Sprint1 | Sprint2 | Sprint3 | total |
-|---------|:-------:|:-------:|:-------:|------:|
-|Juho     | 6       |   2     |         |       |
-|Teemu    |         |         |         |       |
-|Heikki   | 6       |   2     |         |       |
-|Nuutti   | 6       |   6     |         |       |
-|Ella     | 6       |   1     |         |       |
-
-
 Useful links:
  * add here if found something useful
  * [Project tasks](https://ohjelmistotuotanto-hy.github.io/speksi/)
