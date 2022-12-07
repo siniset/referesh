@@ -12,6 +12,11 @@ def test(ctx):
 
 
 @task
+def robot_test(ctx):
+    ctx.run("BROWSER=headlesschrome SERVER=localhost:5000 robot tests/robot/robot_tests", pty=True)
+
+
+@task
 def test_win(ctx):
     ctx.run("python3 -m pytest", pty=False)
 
