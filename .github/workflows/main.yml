@@ -22,5 +22,14 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Run testing phase
-        run: docker compose up --build -d
+      - name: Build test runner
+        run: docker compose build
+
+      - name: Run unit tests
+        run: docker compose run test-runner poetry run invoke test
+
+      # - name: Run Robot tests
+      #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
+
+      - name: Generate code coverage report
+        run: docker compose run test-runner poetry run invoke coverage-report -t html
