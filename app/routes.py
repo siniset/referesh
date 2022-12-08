@@ -1,6 +1,7 @@
-from flask import render_template, request, redirect, abort
+from flask import render_template, request, redirect, abort, send_file
 from app.app import app
 from app.controllers import reference_controller
+from app.services import export_service
 
 
 @app.route("/")
@@ -43,3 +44,9 @@ def save():
 def delete(id):
     reference_controller.delete_by_id(id)
     return redirect("/")
+
+@app.route("/export")
+def export():
+    references = reference_controller.get_all()
+    bibtex_file = export_service.export_as_bibtex(references)
+    return send_file(bibtex_file,download_name="references.bib")
