@@ -12,8 +12,8 @@ def test(ctx):
 
 
 @task
-def robot_test(ctx):
-    ctx.run("""BROWSER=headlesschrome SERVER=localhost:5000
+def robot_test(ctx, browser="chrome", server="localhost:5000"):
+    ctx.run(f"""BROWSER={browser} SERVER={server} \
         robot tests/robot/robot_tests""", pty=True)
 
 
@@ -59,5 +59,5 @@ def coverage(ctx):
 
 
 @task(coverage)
-def coverage_report(ctx):
-    ctx.run("coverage html", pty=True)
+def coverage_report(ctx, type="report"):
+    ctx.run(f"coverage {type}", pty=True)
