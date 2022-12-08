@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-poetry run python3 -m pytest
-poetry run coverage run -m pytest
-poetry run coverage html
