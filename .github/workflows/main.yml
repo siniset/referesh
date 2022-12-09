@@ -9,19 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    services:
-        postgres:
-          image: postgres:10.8
-          env:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: postgres
-            POSTGRES_DB: github actions
-          ports:
-            - 5433:5432
-            
-          options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
             
     steps:
       - uses: actions/checkout@v2
@@ -36,15 +23,6 @@ jobs:
         run: poetry install
         
         
-      - name: Run tests
-        run: poetry run coverage run --branch -m pytest 
-        
-      - name: Coverage report
-        run: poetry run coverage xml
-        
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
-
       - name: Build test runner
         run: docker compose build
 
@@ -55,5 +33,17 @@ jobs:
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
 
       - name: Generate code coverage report
-        run: docker compose run test-runner poetry run invoke coverage-report -t html
+        run: docker compose run test-runner poetry run invoke coverage-report -t xml
+        
+        ###
+        
+      #- name: Run tests
+      #  run: docker compose run test-runner poetry run coverage run --branch -m pytest 
+        
+      #- name: Coverage report
+      #  run: docker compose run test-runner poetry run coverage xml
+        
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+
         
