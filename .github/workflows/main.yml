@@ -31,13 +31,13 @@ jobs:
         
       
       - name: Run tests
-        run: docker compose run test-runner poetry run coverage run --branch -m pytest
+        run: docker compose run test-runner poetry run coverage run --branch -m pytest && poetry run invoke coverage-report -t xml
 
       # - name: Run Robot tests
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
 
-      - name: Generate code coverage report
-        run: docker compose run test-runner poetry run invoke coverage-report -t xml
+      #- name: Generate code coverage report
+      #  run: docker compose run test-runner poetry run invoke coverage-report -t xml
         
       
       #- name: Generate code coverage report
