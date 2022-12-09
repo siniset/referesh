@@ -30,6 +30,9 @@ jobs:
 
       # - name: Run Robot tests
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
+      
+      - name: Run tests
+        run: poetry run coverage run --branch -m pytest 
 
       - name: Generate code coverage report
         run: docker compose run test-runner poetry run invoke coverage-report -t html
