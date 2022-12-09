@@ -37,7 +37,7 @@ jobs:
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
 
       - name: Generate code coverage report
-        run: docker compose run test-runner poetry run invoke coverage-report xml
+        run: docker compose run test-runner poetry run invoke coverage-report -t xml
         
       
       #- name: Generate code coverage report
