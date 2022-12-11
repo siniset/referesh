@@ -11,7 +11,7 @@ from app.services import export_service
 
 @fixture(scope="class", autouse=True)
 def setup_suite():
-    db.create_database_connection(Config.TEST_DATABASE_URL)
+    db.create_database_connection(Config.DATABASE_URL)
 
 
 @fixture(scope='function', autouse=True)
