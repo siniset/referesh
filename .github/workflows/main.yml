@@ -23,15 +23,16 @@ jobs:
         run: poetry install
         
         
-      - name: Build test runner
-        run: docker compose build
+      - name: Run test database
+        run: docker run -p 5432:5432 -e POSTGRES_PASSWORD=ohtu -d postgres:latest
 
       - name: Run unit tests
-        run: docker compose run test-runner poetry run invoke test
-        
+        run: poetry run invoke test --unit
+        env:
+          TEST_DATABASE_URL: postgresql://postgres:ohtu@localhost:5432 
       
-      - name: Run tests
-        run: docker compose run test-runner poetry run coverage run --branch -m pytest && poetry run invoke coverage-report -t xml
+      # - name: Run tests
+        # run: docker compose run test-runner poetry run coverage run --branch -m pytest && poetry run invoke coverage-report -t xml
 
       # - name: Run Robot tests
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
