@@ -37,6 +37,6 @@ jobs:
         run: poetry run invoke coverage-report
 
       - uses: codecov/codecov-action@v3
-      - name: Send coverage report to Codecov
+        name: Send coverage report to Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
