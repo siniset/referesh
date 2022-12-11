@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize]
 
 env:
   TEST_DATABASE_PASSWORD: testing
@@ -43,4 +44,6 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
+        if: ${{ github.event_name  == 'push' }}
       - run: flyctl deploy --remote-only
+        if: ${{ github.event_name  == 'push' }}
