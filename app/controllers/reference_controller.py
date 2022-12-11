@@ -4,9 +4,9 @@ from app.models.field import Field
 from sqlalchemy import select, delete
 
 
-def get_by_id(id):
+def get_by_id(id_):
     return db.session.execute(
-        select(Reference).where(Reference.id == id)
+        select(Reference).where(Reference.id == id_)
     ).scalar_one()
 
 
@@ -20,21 +20,21 @@ def get_titles():
             Field.name == "title").all()
 
 
-def create(name, type, fields={}):
+def create(name, type_, fields={}):
     if len(name) == 0:
         raise ValueError("Name is invalid")
     if len(type) == 0:
         raise ValueError("Type is unknown")
 
-    reference = Reference(name=name, type=type)
+    reference = Reference(name=name, type=type_)
 
-    for name, content in fields.items():
-        reference.fields.append(Field(name=name, content=content))
+    for ref_name, content in fields.items():
+        reference.fields.append(Field(name=ref_name, content=content))
 
     db.session.add(reference)
     db.session.commit()
 
 
-def delete_by_id(id):
-    db.session.execute(delete(Reference).where(Reference.id == id))
+def delete_by_id(id_):
+    db.session.execute(delete(Reference).where(Reference.id == id_))
     db.session.commit()
