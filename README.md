@@ -10,8 +10,8 @@ This is a project for Software Engineering course in the fall of 2022 at Helsink
 
 __Definition of Done__
 
-Toteutetun User storyn toiminnallisuus on ohjelmoitu ja viety tuotantoon. 
-Testikattavuus on 90%, testitapaukset ovat mielekkäitä. 
+Toteutetun User storyn toiminnallisuus on ohjelmoitu ja viety tuotantoon.
+Testikattavuus on 90%, testitapaukset ovat mielekkäitä.
 Testit menevät läpi. Pylint ei havaitse koodissa virheitä.
 
 __Sprint reviews__
@@ -70,3 +70,4 @@ __Manual orchestration__
     * Start test server if one exists and is not running.
   * `invoke stop_test_server`
     * Stop test server container if one exists and is running.
+
