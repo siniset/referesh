@@ -34,7 +34,7 @@ jobs:
         run: poetry run invoke test --unit
 
       - name: Generate coverage report
-        run: poetry run invoke coverage-report
+        run: poetry run invoke coverage-report --type=xml
 
       - uses: codecov/codecov-action@v3
         name: Send coverage report to Codecov
