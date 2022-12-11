@@ -43,4 +43,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
-        run: flyctl deploy --remote-only
+      - run: flyctl deploy --remote-only
