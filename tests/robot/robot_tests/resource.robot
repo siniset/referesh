@@ -3,8 +3,8 @@ Library  SeleniumLibrary
 Library  app/controllers/reference_controller.py
 
 *** Variables ***
-${SERVER}  %{SERVER}
-${BROWSER}  %{BROWSER}
+${SERVER}  localhost:5000
+${BROWSER}  chrome
 ${HOME URL}  http://${SERVER}
 ${DELAY}  0.25 seconds
 

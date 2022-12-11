@@ -11,11 +11,6 @@
         <header>
             <h1 class="site-title">Viitesovellus</h1>
         </header>
-	<form action="/export" method="GET">
-                <div>
-                    <input id="button" type="submit" class="span-12 button text-bold" value="Exporttaa" />
-                </div>
-	</form>
 
         <section class="vertical box">
             <p class="box-title">Lisää viite</p>
@@ -68,8 +63,21 @@
         <section class="vertical box">
             <p class="box-title">Viitteet</p>
 
-            <div class="reference-list vertical flex">
+            <div class="reference-options">
+                <div class="row h-gap-lg">
+                    <div class="column span-4">
+                        <a href="/export" class="button text-bold">Vie tiedostoon</a>
+                    </div>
+                    <div class="column span-4">
+                        <a href="" class="button text-bold">Tuo DOI-viite</a>
+                    </div>
+                    <div class="column span-4">
+                        <a href="" class="button text-bold">Poista kaikki viitteet</a>
+                    </div>
+                </div>
+            </div>
 
+            <div class="reference-list vertical flex">
                 {% for reference in references %}
                 <div onclick={{"toggleReferenceView(" ~ reference.id ~ ")"}}
                     class="reference" data-action="toggle-reference" data-reference-id={{reference.id}}>
