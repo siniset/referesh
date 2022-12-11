@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine
+import logging
+from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 
@@ -10,11 +11,15 @@ Session = None
 
 def create_database_connection(url, echo=False):
     global engine, Base
-    engine = create_engine(url, echo=echo, pool_recycle=60, pool_size=10, pool_pre_ping=True)
+    engine = create_engine(url, echo=echo, pool_recycle=20, pool_size=10, pool_pre_ping=True)
 
 
 def create_tables():
-    Base.metadata.create_all(engine)
+    try:
+        Base.metadata.create_all(engine)
+    except exc.OperationalError:
+        logging.error("Cannot connect to database!")
+        exit(1)
 
 
 def drop_tables():

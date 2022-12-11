@@ -10,5 +10,6 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-root
 COPY . .
 
-RUN touch .env
-RUN echo "TEST_DATABASE_URL=postgresql://postgres:ohtu@database:5432" > .env
+EXPOSE 8080
+
+CMD ["poetry", "run", "invoke", "launch"]
