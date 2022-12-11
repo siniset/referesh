@@ -24,14 +24,16 @@ jobs:
         
         
       - name: Build test runner
-        run: docker compose build
+        run: |
+          docker compose build
+          docker compose run database
 
       - name: Run unit tests
-        run: docker compose run test-runner poetry run invoke test
+        run: TEST_DATABASE_URL=postgresql://postgres:ohtu@database:5432 poetry run invoke test --unit
         
       
-      - name: Run tests
-        run: docker compose run test-runner poetry run coverage run --branch -m pytest && poetry run invoke coverage-report -t xml
+      # - name: Run tests
+        # run: docker compose run test-runner poetry run coverage run --branch -m pytest && poetry run invoke coverage-report -t xml
 
       # - name: Run Robot tests
       #   run: docker compose run test-runner poetry run invoke robot-test -b headlesschrome
@@ -53,7 +55,7 @@ jobs:
       #- name: Coverage report
       #  run: docker compose run test-runner poetry run coverage xml
         
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+      # - name: Coverage report to Codecov
+        # run: bash <(curl -s https://codecov.io/bash)
 
         
