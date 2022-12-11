@@ -57,7 +57,7 @@ def format(ctx):
 
 @task
 def coverage(ctx):
-    ctx.run("coverage run -m pytest", pty=pty)
+    ctx.run("MODE=test coverage run -m pytest", pty=pty)
 
 
 @task(coverage)
