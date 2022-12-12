@@ -40,7 +40,7 @@ def save():
     return redirect("/")
 
 
-@app.route("/references/<id>", methods=["PUT"])
+@app.route("/references/edit/<id>", methods=["GET", "PUT"])
 def edit():
     reference_controller.edit()
     return redirect("/")
