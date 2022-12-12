@@ -41,8 +41,8 @@ def save():
 
 
 @app.route("/references/edit/<id>", methods=["GET", "PUT"])
-def edit():
-    reference_controller.edit()
+def edit(id):
+    reference_controller.edit(id, "ilari", "book")
     return redirect("/")
 
 
