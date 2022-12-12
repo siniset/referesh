@@ -1,7 +1,5 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from app.models.reference import Reference
-from sqlalchemy import delete, select
 from dotenv import find_dotenv, load_dotenv
 from os import environ
 

@@ -1,3 +1,4 @@
+import logging
 from app import db
 from app.models.reference import Reference
 from app.models.field import Field
@@ -33,6 +34,15 @@ def create(name, type, fields={}):
 
     db.session.add(reference)
     db.session.commit()
+
+
+def edit(id, name, type, fields={}):
+
+
+    db.session.query(Reference).filter(id == Reference.id).update({'name': name})
+    db.session.commit()
+
+
 
 
 def delete_by_id(id):
