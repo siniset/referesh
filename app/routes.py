@@ -40,6 +40,12 @@ def save():
     return redirect("/")
 
 
+@app.route("/references/<id>", methods=["PUT"])
+def edit():
+    reference_controller.edit()
+    return redirect("/")
+
+
 @app.route("/delete/<id>", methods=["GET", "DELETE"])
 def delete(id):
     reference_controller.delete_by_id(id)

@@ -1,3 +1,4 @@
+import logging
 from app import db
 from app.models.reference import Reference
 from app.models.field import Field
@@ -33,6 +34,10 @@ def create(name, type, fields={}):
 
     db.session.add(reference)
     db.session.commit()
+
+
+def edit():
+    logging.info("Edit")
 
 
 def delete_by_id(id):
