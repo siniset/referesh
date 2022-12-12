@@ -36,13 +36,16 @@ def create(name, type, fields={}):
     db.session.commit()
 
 
-def edit(id, name, type, fields={}):
+def edit(id, name, type_, fields={}):
 
 
     db.session.query(Reference).filter(id == Reference.id).update({'name': name})
+
+    for field_name, field_content in fields.items():
+        db.session.query(Field)
+            .filter(Field.reference_id == id)
+            .filter(Field.name == field_name).update({"content": field_content})
     db.session.commit()
-
-
 
 
 def delete_by_id(id):
