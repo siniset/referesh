@@ -30,9 +30,6 @@ Delete Reference
     Click Delete
     Main Page Should Be Open
 
-Testing
-    Removal  37
-
 *** Keywords ***
 Save Reference Should Succeed
     Main Page Should Be Open
@@ -41,7 +38,7 @@ Delete Reference Should Succeed
     Main Page Should Be Open
 
 Submit Credentials
-    Click Button  submit_button
+    Click Button  xpath://*[@id="button"]
 
 Set Reference Type
     [Arguments]  ${reference-type}
@@ -72,7 +69,3 @@ Show Reference
 
 CLick Delete
     Click Link  xpath:/html/body/section[2]/div/div/div[2]/a
-
-Removal
-    [Arguments]  ${id}
-    Delete By Id  ${id}

@@ -1,12 +1,13 @@
 *** Settings ***
 Library  SeleniumLibrary
-Library  app/controllers/reference_controller.py
+Library  tests/robot/DatabaseLibrary.py
+Library  tests/robot/ReferenceLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
 ${HOME URL}  http://${SERVER}
-${DELAY}  0.25 seconds
+${DELAY}  0.3 seconds
 
 *** Keywords ***
 Open And Configure Browser
