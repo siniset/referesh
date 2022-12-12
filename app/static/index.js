@@ -1,6 +1,11 @@
 const FieldContainer = document.createElement("div")
 FieldContainer.classList.add("reference-field-container", "vertical", "flex", "v-gap-lg")
 
+const changeButton = document.createElement("b")
+changeButton.classList.add("button", "button-dark", "text-bold")
+changeButton.textContent = "Muuta"
+FieldContainer.appendChild(changeButton)
+
 const deleteButton = document.createElement("a")
 deleteButton.classList.add("button", "button-dark", "text-bold")
 deleteButton.textContent = "Poista"

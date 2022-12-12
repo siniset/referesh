@@ -134,6 +134,11 @@ a.button {
   display: block;
 }
 
+b.button {
+  display: block;
+}
+
+
 .site-title {
   font-size: 2rem;
   font-weight: 600;
