@@ -1,0 +1,23 @@
+# flyctl launch added from .gitignore
+**/__pycache__
+**/*.pyc
+
+**/htmlcov
+**/.coverage
+**/coverage.xml
+
+**/.env
+**/venv
+
+**/log.html
+**/output.xml
+**/report.html
+**/selenium-screenshot*
+
+# flyctl launch added from .pytest_cache/.gitignore
+# Created by pytest automatically.
+.pytest_cache/**/*
+
+# flyctl launch added from htmlcov/.gitignore
+# Created by coverage.py
+htmlcov/**/*

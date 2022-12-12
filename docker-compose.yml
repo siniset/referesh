@@ -1,21 +1,12 @@
 version: '3'
 
 services:
-  test-runner:
-    build: .
-    depends_on:
-      - database
-    networks:
-      - ohtu-testing
-
   database:
     image: postgres:latest
-    restart: always
     networks:
       - ohtu-testing
     environment:
       - POSTGRES_PASSWORD=ohtu
-      - TEST_DATABASE_URL=postgresql://postgres:ohtu@database:5432
 
 networks:
   ohtu-testing:
