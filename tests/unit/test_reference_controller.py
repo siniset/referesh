@@ -10,7 +10,7 @@ from app.controllers import reference_controller
 
 @fixture(scope="class", autouse=True)
 def setup_suite():
-    db.create_database_connection(Config.TEST_DATABASE_URL)
+    db.create_database_connection(Config.DATABASE_URL)
 
 
 @fixture(scope='function', autouse=True)
@@ -25,7 +25,7 @@ def setup_suite_test():
 class TestReferenceController:
     def test_create_adds_reference_with_valid_values(self):
         reference_controller.create("REFNAME", "Book title")
-        assert 1 == 1
+        assert 1 == len(db.session.execute(select(Reference)).all())
 
     def test_create_fails_with_invalid_values(self):
         with raises(Exception) as excinfo:
