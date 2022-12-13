@@ -6,6 +6,8 @@
 
 This is a project for Software Engineering course in the fall of 2022 at Helsinki University.
 
+* [Application website](https://viitesovellus.fly.dev/)
+
 * [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)
 
 __Definition of Done__
