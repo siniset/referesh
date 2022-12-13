@@ -38,7 +38,7 @@ Delete Reference Should Succeed
     Main Page Should Be Open
 
 Submit Credentials
-    Click Button  button
+    Click Button  xpath://*[@id="button"]
 
 Set Reference Type
     [Arguments]  ${reference-type}
@@ -68,4 +68,4 @@ Show Reference
     Click Element  xpath:/html/body/section[2]/div/div[1]
 
 CLick Delete
-    Click Link  xpath:/html/body/section[2]/div/div[1]/div[2]/a
+    Click Link  xpath:/html/body/section[2]/div/div/div[2]/a
