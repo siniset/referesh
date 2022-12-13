@@ -11,7 +11,12 @@ Session = None
 
 def create_database_connection(url, echo=False):
     global engine, Base
-    engine = create_engine(url, echo=echo, pool_recycle=20, pool_size=10, pool_pre_ping=True)
+    engine = create_engine(
+        url,
+        echo=echo,
+        pool_recycle=20,
+        pool_size=10,
+        pool_pre_ping=True)
 
 
 def create_tables():

@@ -42,7 +42,9 @@ def save():
 
 @app.route("/references/edit/<id>", methods=["GET", "PUT"])
 def edit(id):
-    reference_controller.edit(id, "ilari", "book", {"author": "kjfdlkfjl author"})
+    reference_controller.edit(
+        id, "ilari", "book", {
+            "author": "kjfdlkfjl author"})
     return redirect("/")
 
 
@@ -51,8 +53,9 @@ def delete(id):
     reference_controller.delete_by_id(id)
     return redirect("/")
 
+
 @app.route("/export")
 def export():
     references = reference_controller.get_all()
     bibtex_file = export_service.export_as_bibtex(references)
-    return send_file(bibtex_file,download_name="references.bib")
+    return send_file(bibtex_file, download_name="references.bib")
