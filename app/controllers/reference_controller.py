@@ -16,18 +16,18 @@ def get_all():
 
 
 def get_titles():
-    return db.session.query(Reference.id, Reference.type, Reference.name, Field.content.label(
+    return db.session.query(Reference.id, Reference.name, Field.content.label(
         "title")).select_from(Reference).join(Field).filter(
             Field.name == "title").all()
 
 
-def create(name, type, fields={}):
+def create(name, type, fields={}, project_id=1):
     if len(name) == 0:
         raise ValueError("Name is invalid")
     if len(type) == 0:
         raise ValueError("Type is unknown")
 
-    reference = Reference(name=name, type=type)
+    reference = Reference(name=name, type=type, project_id=project_id)
 
     for name, content in fields.items():
         reference.fields.append(Field(name=name, content=content))
@@ -36,6 +36,18 @@ def create(name, type, fields={}):
     db.session.commit()
 
 
+def edit(id, name, type_, fields={}):
+
+    db.session.query(Reference).filter(
+        id == Reference.id).update({'name': name})
+
+    for field_name, field_content in fields.items():
+        db.session.query(Field).filter(Field.reference_id == id).filter(
+            Field.name == field_name).update({"content": field_content})
+    db.session.commit()
+
+
 def delete_by_id(id):
     db.session.execute(delete(Reference).where(Reference.id == id))
     db.session.commit()
+
