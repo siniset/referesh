@@ -191,14 +191,20 @@ b.button {
 
 .reference-info {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 1rem 0 1rem 1.5rem;
+  align-items: center;
 }
 
 
-.reference-name {
-  /* padding: 1.5rem 1rem; */
+.reference-badge {
   font-weight: bold;
+  background-color: #232c46;
+  color: #fff;
+  display: inline-block;
+  font-size: .75rem;
+  padding: .25rem;
+  border-radius: .25rem;
 }
 
 
@@ -211,12 +217,21 @@ b.button {
   padding: 1rem 1.5rem;
 }
 
+.reference-body {
+  margin: 0 1.5rem;
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
 
 .field {
-  background-color: #f2f5f5;
-  padding: 1rem;
-  border-radius: .333em;
-  border: 1px solid #d5dfdf;
+  /* background-color: #f2f5f5; */
+  /* padding: 1rem; */
+  /* border-radius: .333em; */
+  /* border: 1px solid #d5dfdf; */
 }
 
 .reference-options {

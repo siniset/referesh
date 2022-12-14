@@ -1,51 +1,71 @@
-const FieldContainer = document.createElement("div")
-FieldContainer.classList.add("reference-field-container", "vertical", "flex", "v-gap-lg")
+const references = document.querySelectorAll(".reference")
 
-const changeButton = document.createElement("a")
-changeButton.id = "change-button"
-changeButton.classList.add("button", "button-dark", "text-bold")
-changeButton.textContent = "Muuta"
-FieldContainer.appendChild(changeButton)
+references.forEach(reference =>
+  reference
+    .firstElementChild
+  .addEventListener("click", () => handleHeaderClick(reference.dataset.referenceId)))
 
-const deleteButton = document.createElement("a")
-deleteButton.classList.add("button", "button-dark", "text-bold")
-deleteButton.textContent = "Poista"
-FieldContainer.appendChild(deleteButton)
+function fetchField(referenceId) {
+  return fetch(`/references/${referenceId}`)
+    .then(response => response.json())
+}
 
-const FieldView = document.createElement("div")
-FieldView.classList.add("field")
+function createFieldElement(field) {
+  const [name, content] = field
+  
+  const fieldElement = document.createElement("div")
+  fieldElement.classList.add("field", "flex", "h-gap-md")
 
-Array.from(document.querySelectorAll(".reference")).forEach(ref => {
-  ref.children[0].onclick = () => {
-    toggleReferenceView(ref.dataset.referenceId)
-  }
-})
+  const nameElement = document.createElement("div")
+  nameElement.textContent = name[0].toUpperCase() + name.slice(1) + ":"
+  nameElement.classList.add("text-bold")
 
-async function toggleReferenceView(id) {
-  const referenceView = document.querySelector(`[data-reference-id='${id}']`)
+  const contentElement = document.createElement("div")
+  contentElement.textContent = content;
 
-  if (referenceView.classList.toggle("open")) {
-    const referenceData = await fetchReferenceData(id)
-    const fieldContainer = FieldContainer.cloneNode(true)
+  fieldElement.append(nameElement, contentElement)
 
-    fieldContainer.prepend(
-      ...Object.entries(referenceData).map(([name, content]) => {
-        const view = FieldView.cloneNode(false)
-        view.textContent = `${name}: ${content}`
-        return view
-      })
-    )
+  return fieldElement
+}
 
-    referenceView.appendChild(fieldContainer)
-    document.getElementById("change-button").href = `/references/edit/${id}`
-    fieldContainer.lastChild.href = `/delete/${id}`
+async function openReferenceView(referenceElement) {
+  const body = document.createElement("div")
+  body.classList.add("reference-body")
+
+  const fieldList = document.createElement("div")
+  fieldList.classList.add("field-list", "v-gap-md")
+
+  const deleteButton = document.createElement("a")
+  deleteButton.textContent = "Poista"
+  deleteButton.classList.add("button", "button-dark", "text-bold")
+  deleteButton.href = `/delete/${referenceElement.dataset.referenceId}`
+
+  referenceElement.appendChild(body) 
+  body.appendChild(fieldList) 
+  body.appendChild(deleteButton) 
+  
+  fetchField(referenceElement.dataset.referenceId)
+    .then(Object.entries)
+    .then(fields => fields.filter(([name]) => name !== "title"))
+    .then(fields => fieldList.append(...fields.map(createFieldElement)))
+}
+
+function closeReferenceView(element) {
+  element.querySelector(".reference-body").remove()
+}
+
+function toggleReferenceView(referenceElement) {
+  const isOpen = referenceElement.classList.toggle("open")
+
+  if (isOpen) {
+    openReferenceView(referenceElement)
   } else {
-    referenceView.querySelector(".reference-field-container").remove()
+    closeReferenceView(referenceElement)
   }
 }
 
+function handleHeaderClick(referenceId) {
+  const referenceElement = document.querySelector(`.reference[data-reference-id="${referenceId}"]`)
 
-async function fetchReferenceData(id) {
-  const reference = await fetch(`/references/${id}`)
-  return reference.json()
+  toggleReferenceView(referenceElement)
 }
