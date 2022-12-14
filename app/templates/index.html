@@ -13,6 +13,23 @@
         </header>
 
         <section class="vertical box">
+            <p class="box-title">Luo projekti</p>
+
+            <form class="vertical form v-gap-xl" action="/create_project" method="POST">
+                <div class="form-row row h-gap-lg">
+                    <div class="span-6 vertical flex v-gap-md">
+                        <label for="reference-name">Nimi</label>
+                        <input name="name" id="project-name" placeholder="Nimi" type="text" class="text-field" />
+                    </div>
+                </div>
+                <div>
+                    <input id="project_button" type="submit" class="span-12 button text-bold" value="Luo" />
+                </div>
+            </form>
+
+        </section>
+
+        <section class="vertical box">
             <p class="box-title">Lisää viite</p>
 
             <form class="vertical form v-gap-xl" action="/save" method="POST">

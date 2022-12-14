@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, abort, send_file
 from app.app import app
 from app.controllers import reference_controller
+from app.controllers import project_controller
 from app.services import export_service
 
 
@@ -36,7 +37,19 @@ def save():
         "publisher": request.form["publisher"]
     }
 
+    project_controller.create_default_project()
     reference_controller.create(name, type, fields)
+    return redirect("/")
+
+
+@app.route("/create_project", methods=["POST"])
+def create_project():
+    name = request.form["name"]
+
+    if len(name) == 0:
+        abort(400)
+
+    project_controller.create_project(name)
     return redirect("/")
 
 
