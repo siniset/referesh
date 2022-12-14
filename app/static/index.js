@@ -1,51 +1,134 @@
-const FieldContainer = document.createElement("div")
-FieldContainer.classList.add("reference-field-container", "vertical", "flex", "v-gap-lg")
+const references = document.querySelectorAll(".reference");
 
-const changeButton = document.createElement("a")
-changeButton.id = "change-button"
-changeButton.classList.add("button", "button-dark", "text-bold")
-changeButton.textContent = "Muuta"
-FieldContainer.appendChild(changeButton)
+references.forEach((reference) =>
+  reference.firstElementChild.addEventListener("click", () =>
+    handleHeaderClick(reference.dataset.referenceId)
+  )
+);
 
-const deleteButton = document.createElement("a")
-deleteButton.classList.add("button", "button-dark", "text-bold")
-deleteButton.textContent = "Poista"
-FieldContainer.appendChild(deleteButton)
-
-const FieldView = document.createElement("div")
-FieldView.classList.add("field")
-
-Array.from(document.querySelectorAll(".reference")).forEach(ref => {
-  ref.children[0].onclick = () => {
-    toggleReferenceView(ref.dataset.referenceId)
-  }
-})
-
-async function toggleReferenceView(id) {
-  const referenceView = document.querySelector(`[data-reference-id='${id}']`)
-
-  if (referenceView.classList.toggle("open")) {
-    const referenceData = await fetchReferenceData(id)
-    const fieldContainer = FieldContainer.cloneNode(true)
-
-    fieldContainer.prepend(
-      ...Object.entries(referenceData).map(([name, content]) => {
-        const view = FieldView.cloneNode(false)
-        view.textContent = `${name}: ${content}`
-        return view
-      })
-    )
-
-    referenceView.appendChild(fieldContainer)
-    document.getElementById("change-button").href = `/references/edit/${id}`
-    fieldContainer.lastChild.href = `/delete/${id}`
-  } else {
-    referenceView.querySelector(".reference-field-container").remove()
-  }
+function fetchField(referenceId) {
+  return fetch(`/references/${referenceId}`).then((response) =>
+    response.json()
+  );
 }
 
+function deleteReference(id) {
+  return fetch(`/references/${id}`, {
+    method: "DELETE"
+  })
+}
 
-async function fetchReferenceData(id) {
-  const reference = await fetch(`/references/${id}`)
-  return reference.json()
+function deleteField(id) {
+  return fetch(`/fields/${id}`, {
+    method: "DELETE"
+  })
+}
+
+function updateField(id, content) {
+  return fetch(`/fields/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  }).then((response) => response.json());
+}
+
+function makeElement(type, props) {
+  const element = document.createElement(type);
+  Object.entries(props).forEach(([key, value]) => (element[key] = value));
+  return element;
+}
+
+function createFieldElement(field) {
+  const { id, name, content } = field;
+  let isEditMode = false,
+    contentInputElement = null;
+
+  const fieldElement = makeElement("div", { classList: "field flex" }),
+    nameElement = makeElement("div", {
+      textContent: name[0].toUpperCase() + name.slice(1) + ":",
+      classList: "text-bold",
+    }),
+    contentElement = makeElement("div", {
+      textContent: content,
+      classList: "grow field-content",
+    }),
+    deleteButton = makeElement("Poista", {
+      textContent: "Poista",
+      classList: "button button-dark badge",
+    }),
+    editButton = makeElement("button", {
+      textContent: "Muokkaa",
+      classList: "button button-dark badge",
+    });
+
+  fieldElement.append(nameElement, contentElement, editButton, deleteButton);
+
+  deleteButton.addEventListener("click", () => {
+    deleteField(id).then(() => fieldElement.remove())
+  })
+
+  editButton.addEventListener("click", () => {
+    isEditMode = !isEditMode;
+
+    if (isEditMode) {
+      editButton.textContent = "Tallenna";
+      contentInputElement = makeElement("input", {
+        type: "text",
+        classList: "grow text-field",
+        value: content
+      })
+
+      fieldElement.replaceChild(contentInputElement, contentElement);
+    } else {
+      const newContent = contentInputElement.value;
+      if (newContent) {
+        updateField(id, contentInputElement.value).then((response) => {
+          contentElement.textContent = response.content;
+          editButton.textContent = "Muokkaa";
+          fieldElement.replaceChild(contentElement, contentInputElement);
+          contentInputElement.remove();
+        });
+      }
+    }
+  });
+
+  return fieldElement;
+}
+
+function openReferenceView(referenceElement) {
+  const body = makeElement("div", { classList: "reference-body" }),
+    fieldList = makeElement("div", { classList: "field-list v-gap-lg" }),
+    deleteButton = makeElement("button", {
+      textContent: "Poista viite",
+      classList: "span-12 button button-dark"
+    })
+
+  deleteButton.addEventListener("click", () =>
+    deleteReference(referenceElement.dataset.referenceId).then(() =>
+      referenceElement.remove()
+    )
+  )
+
+  referenceElement.appendChild(body);
+  body.append(fieldList, deleteButton);
+
+  fetchField(referenceElement.dataset.referenceId)
+    .then((fields) => fields.filter((field) => field.name !== "title"))
+    .then((fields) => fieldList.append(...fields.map(createFieldElement)));
+}
+
+function closeReferenceView(element) {
+  element.querySelector(".reference-body").remove();
+}
+
+function toggleReferenceView(referenceElement) {
+  const isOpen = referenceElement.classList.toggle("open");
+  (isOpen ? openReferenceView : closeReferenceView)(referenceElement);
+}
+
+function handleHeaderClick(referenceId) {
+  const referenceElement = document.querySelector(
+    `.reference[data-reference-id="${referenceId}"]`
+  );
+  toggleReferenceView(referenceElement);
 }

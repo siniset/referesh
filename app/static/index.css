@@ -106,6 +106,7 @@ section:not(:last-child) {
   border-radius: .333rem;
   border: 1px solid #ccc;
   background-color: #fff;
+  font-size: 1rem;
 }
 
 
@@ -130,12 +131,35 @@ section:not(:last-child) {
   font-weight: 700;
 }
 
+
+.text-small {
+  font-size: 0.8rem;
+}
+
+
 a.button {
   display: block;
 }
 
 b.button {
   display: block;
+}
+
+
+.badge {
+  font-weight: bold;
+  background-color: #cdd;
+  color: #233;
+  display: inline-block;
+  font-size: .75rem;
+  padding: .25rem;
+  border-radius: .25rem;
+}
+
+
+.badge-dark {
+  background-color: #232c46;
+  color: #fff;
 }
 
 
@@ -191,14 +215,9 @@ b.button {
 
 .reference-info {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 1rem 0 1rem 1.5rem;
-}
-
-
-.reference-name {
-  /* padding: 1.5rem 1rem; */
-  font-weight: bold;
+  align-items: center;
 }
 
 
@@ -211,12 +230,28 @@ b.button {
   padding: 1rem 1.5rem;
 }
 
+.reference-body {
+  margin: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
 
 .field {
-  background-color: #f2f5f5;
-  padding: 1rem;
-  border-radius: .333em;
-  border: 1px solid #d5dfdf;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+
+.field-content {
+  margin: .5rem .666rem;
 }
 
 .reference-options {

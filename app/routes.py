@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, abort, send_file
 from app.app import app
 from app.controllers import reference_controller
+from app.controllers import field_controller
 from app.services import export_service
 
 
@@ -14,9 +15,13 @@ def index():
 def reference(id):
     reference = reference_controller.get_by_id(id)
 
-    fields = {}
+    fields = []
     for field in reference.fields:
-        fields[field.name] = field.content
+        fields.append({
+            "id": field.id,
+            "name": field.name,
+            "content": field.content
+        })
 
     return fields
 
@@ -40,18 +45,23 @@ def save():
     return redirect("/")
 
 
-@app.route("/references/edit/<id>", methods=["GET", "PUT"])
-def edit(id):
-    reference_controller.edit(
-        id, "ilari", "book", {
-            "author": "kjfdlkfjl author"})
-    return redirect("/")
+@app.route("/fields/<id>", methods=["PUT"])
+def update_field(id):
+    content = request.json["content"]
+    field_controller.update(id, content)
+    return {"content": content}
 
 
-@app.route("/delete/<id>", methods=["GET", "DELETE"])
-def delete(id):
+@app.route("/references/<id>", methods=["DELETE"])
+def delete_reference(id):
     reference_controller.delete_by_id(id)
-    return redirect("/")
+    return {"id": id}
+
+
+@app.route("/fields/<id>", methods=["DELETE"])
+def delete_field(id):
+    field_controller.delete_by_id(id)
+    return {"id": id}
 
 
 @app.route("/export")
