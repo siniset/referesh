@@ -21,13 +21,13 @@ class ReferenceLibrary():
             "title")).select_from(Reference).join(Field).filter(
                 Field.name == "title").all()
 
-    def create(self, name, type, fields={}):
+    def create(self, name, type, fields={}, project_id=1):
         if len(name) == 0:
             raise ValueError("Name is invalid")
         if len(type) == 0:
             raise ValueError("Type is unknown")
 
-        reference = Reference(name=name, type=type)
+        reference = Reference(name=name, type=type, project_id=project_id)
 
         for name, content in fields.items():
             reference.fields.append(Field(name=name, content=content))
