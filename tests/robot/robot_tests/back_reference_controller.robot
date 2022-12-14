@@ -20,4 +20,4 @@ Delete Reference
 *** Keywords ***
 Remove Reference
     [Arguments]  ${id}
-    Delete By Id  ${id}
+    ReferenceLibrary.Delete By Id  ${id}

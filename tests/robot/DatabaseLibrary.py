@@ -14,6 +14,7 @@ class DatabaseLibrary():
         self.Session = None
 
         self.create_database_connection(environ.get("DATABASE_URL"))
+        self.create_tables()
         self.create_session()
 
     def create_database_connection(self, url, echo=False):
@@ -21,10 +22,10 @@ class DatabaseLibrary():
         self.engine = create_engine(url, echo=echo)
 
     def create_tables(self):
-        self.Base.metadata.create_all(engine)
+        self.Base.metadata.create_all(self.engine)
 
     def drop_tables(self):
-        self.Base.metadata.drop_all(engine)
+        self.Base.metadata.drop_all(self.engine)
 
     def create_session(self):
         global Session, session

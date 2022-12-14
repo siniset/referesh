@@ -68,4 +68,4 @@ Show Reference
     Click Element  xpath:/html/body/section[2]/div/div[1]
 
 CLick Delete
-    Click Link  xpath:/html/body/section[2]/div/div/div[2]/a
+    Click Link  /html/body/section[3]/div[2]/div[1]/div[2]/button
