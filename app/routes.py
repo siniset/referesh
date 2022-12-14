@@ -45,14 +45,6 @@ def save():
     return redirect("/")
 
 
-@app.route("/references/edit/<id>", methods=["GET", "PUT"])
-def edit(id):
-    reference_controller.edit(
-        id, "ilari", "book", {
-            "author": "kjfdlkfjl author"})
-    return redirect("/")
-
-
 @app.route("/fields/<id>", methods=["PUT"])
 def update_field(id):
     content = request.json["content"]
