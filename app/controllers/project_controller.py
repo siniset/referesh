@@ -4,7 +4,7 @@ from sqlalchemy import select, delete
 
 
 def create_default_project():
-    if not db.session.execute(select(Project)).all():
+    if not get_all():
         project = Project(name="default")
 
         db.session.add(project)

@@ -72,4 +72,3 @@ def export():
     references = reference_controller.get_all()
     bibtex_file = export_service.export_as_bibtex(references)
     return send_file(bibtex_file, download_name="references.bib")
-

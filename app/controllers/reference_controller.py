@@ -50,4 +50,3 @@ def edit(id, name, type_, fields={}):
 def delete_by_id(id):
     db.session.execute(delete(Reference).where(Reference.id == id))
     db.session.commit()
-
