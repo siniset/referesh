@@ -1,4 +1,5 @@
 from io import BytesIO
+from pybtex.database import parse_file
 
 
 def export_as_bibtex(references):
@@ -17,3 +18,20 @@ def bibtexify_reference(reference):
         bibtex += "\t" + f"{field.name} = " + "{" + f"{field.content}" + "},\n"
     bibtex += "}\n\n"
     return bibtex
+
+def parse_from_bibtex(file):
+    bib_data = parse_file(file)
+    bib_dict = bib_data.entries
+    references = []
+    for reference in bib_dict.values():
+        type = reference.type
+        author = str(reference.persons['author'][0])
+        title = reference.fields['title']
+        year = reference.fields['year']
+        publisher = reference.fields['publisher']
+        ref_name = author.split()[0].strip(',')+year
+        reference = [type, ref_name, author, title, year, publisher]
+        references.append(reference)
+    return references
+
+#print(parse_from_bibtex('test.bib'))      # for testing
