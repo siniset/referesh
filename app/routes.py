@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, abort, send_file
 from app.app import app
 from app.controllers import reference_controller
-from app.controllers import field_controller
+from app.controllers import project_controller
 from app.services import export_service
 
 
@@ -15,13 +15,9 @@ def index():
 def reference(id):
     reference = reference_controller.get_by_id(id)
 
-    fields = []
+    fields = {}
     for field in reference.fields:
-        fields.append({
-            "id": field.id,
-            "name": field.name,
-            "content": field.content
-        })
+        fields[field.name] = field.content
 
     return fields
 
@@ -41,27 +37,34 @@ def save():
         "publisher": request.form["publisher"]
     }
 
+    project_controller.create_default_project()
     reference_controller.create(name, type, fields)
     return redirect("/")
 
 
-@app.route("/fields/<id>", methods=["PUT"])
-def update_field(id):
-    content = request.json["content"]
-    field_controller.update(id, content)
-    return {"content": content}
+@app.route("/create_project", methods=["POST"])
+def create_project():
+    name = request.form["name"]
+
+    if len(name) == 0:
+        abort(400)
+
+    project_controller.create_project(name)
+    return redirect("/")
 
 
-@app.route("/references/<id>", methods=["DELETE"])
-def delete_reference(id):
+@app.route("/references/edit/<id>", methods=["GET", "PUT"])
+def edit(id):
+    reference_controller.edit(
+        id, "ilari", "book", {
+            "author": "kjfdlkfjl author"})
+    return redirect("/")
+
+
+@app.route("/delete/<id>", methods=["GET", "DELETE"])
+def delete(id):
     reference_controller.delete_by_id(id)
-    return {"id": id}
-
-
-@app.route("/fields/<id>", methods=["DELETE"])
-def delete_field(id):
-    field_controller.delete_by_id(id)
-    return {"id": id}
+    return redirect("/")
 
 
 @app.route("/export")
