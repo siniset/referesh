@@ -16,7 +16,7 @@ def get_all():
 
 
 def get_titles():
-    return db.session.query(Reference.id, Reference.name, Field.content.label(
+    return db.session.query(Reference.id, Reference.type, Reference.name, Field.content.label(
         "title")).select_from(Reference).join(Field).filter(
             Field.name == "title").all()
 

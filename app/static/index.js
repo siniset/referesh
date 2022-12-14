@@ -1,71 +1,134 @@
-const references = document.querySelectorAll(".reference")
+const references = document.querySelectorAll(".reference");
 
-references.forEach(reference =>
-  reference
-    .firstElementChild
-  .addEventListener("click", () => handleHeaderClick(reference.dataset.referenceId)))
+references.forEach((reference) =>
+  reference.firstElementChild.addEventListener("click", () =>
+    handleHeaderClick(reference.dataset.referenceId)
+  )
+);
 
 function fetchField(referenceId) {
-  return fetch(`/references/${referenceId}`)
-    .then(response => response.json())
+  return fetch(`/references/${referenceId}`).then((response) =>
+    response.json()
+  );
+}
+
+function deleteReference(id) {
+  return fetch(`/references/${id}`, {
+    method: "DELETE"
+  })
+}
+
+function deleteField(id) {
+  return fetch(`/fields/${id}`, {
+    method: "DELETE"
+  })
+}
+
+function updateField(id, content) {
+  return fetch(`/fields/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content }),
+  }).then((response) => response.json());
+}
+
+function makeElement(type, props) {
+  const element = document.createElement(type);
+  Object.entries(props).forEach(([key, value]) => (element[key] = value));
+  return element;
 }
 
 function createFieldElement(field) {
-  const [name, content] = field
-  
-  const fieldElement = document.createElement("div")
-  fieldElement.classList.add("field", "flex", "h-gap-md")
+  const { id, name, content } = field;
+  let isEditMode = false,
+    contentInputElement = null;
 
-  const nameElement = document.createElement("div")
-  nameElement.textContent = name[0].toUpperCase() + name.slice(1) + ":"
-  nameElement.classList.add("text-bold")
+  const fieldElement = makeElement("div", { classList: "field flex" }),
+    nameElement = makeElement("div", {
+      textContent: name[0].toUpperCase() + name.slice(1) + ":",
+      classList: "text-bold",
+    }),
+    contentElement = makeElement("div", {
+      textContent: content,
+      classList: "grow field-content",
+    }),
+    deleteButton = makeElement("Poista", {
+      textContent: "Poista",
+      classList: "button button-dark badge",
+    }),
+    editButton = makeElement("button", {
+      textContent: "Muokkaa",
+      classList: "button button-dark badge",
+    });
 
-  const contentElement = document.createElement("div")
-  contentElement.textContent = content;
+  fieldElement.append(nameElement, contentElement, editButton, deleteButton);
 
-  fieldElement.append(nameElement, contentElement)
+  deleteButton.addEventListener("click", () => {
+    deleteField(id).then(() => fieldElement.remove())
+  })
 
-  return fieldElement
+  editButton.addEventListener("click", () => {
+    isEditMode = !isEditMode;
+
+    if (isEditMode) {
+      editButton.textContent = "Tallenna";
+      contentInputElement = makeElement("input", {
+        type: "text",
+        classList: "grow text-field",
+        value: content
+      })
+
+      fieldElement.replaceChild(contentInputElement, contentElement);
+    } else {
+      const newContent = contentInputElement.value;
+      if (newContent) {
+        updateField(id, contentInputElement.value).then((response) => {
+          contentElement.textContent = response.content;
+          editButton.textContent = "Muokkaa";
+          fieldElement.replaceChild(contentElement, contentInputElement);
+          contentInputElement.remove();
+        });
+      }
+    }
+  });
+
+  return fieldElement;
 }
 
-async function openReferenceView(referenceElement) {
-  const body = document.createElement("div")
-  body.classList.add("reference-body")
+function openReferenceView(referenceElement) {
+  const body = makeElement("div", { classList: "reference-body" }),
+    fieldList = makeElement("div", { classList: "field-list v-gap-lg" }),
+    deleteButton = makeElement("button", {
+      textContent: "Poista viite",
+      classList: "span-12 button button-dark"
+    })
 
-  const fieldList = document.createElement("div")
-  fieldList.classList.add("field-list", "v-gap-md")
+  deleteButton.addEventListener("click", () =>
+    deleteReference(referenceElement.dataset.referenceId).then(() =>
+      referenceElement.remove()
+    )
+  )
 
-  const deleteButton = document.createElement("a")
-  deleteButton.textContent = "Poista"
-  deleteButton.classList.add("button", "button-dark", "text-bold")
-  deleteButton.href = `/delete/${referenceElement.dataset.referenceId}`
+  referenceElement.appendChild(body);
+  body.append(fieldList, deleteButton);
 
-  referenceElement.appendChild(body) 
-  body.appendChild(fieldList) 
-  body.appendChild(deleteButton) 
-  
   fetchField(referenceElement.dataset.referenceId)
-    .then(Object.entries)
-    .then(fields => fields.filter(([name]) => name !== "title"))
-    .then(fields => fieldList.append(...fields.map(createFieldElement)))
+    .then((fields) => fields.filter((field) => field.name !== "title"))
+    .then((fields) => fieldList.append(...fields.map(createFieldElement)));
 }
 
 function closeReferenceView(element) {
-  element.querySelector(".reference-body").remove()
+  element.querySelector(".reference-body").remove();
 }
 
 function toggleReferenceView(referenceElement) {
-  const isOpen = referenceElement.classList.toggle("open")
-
-  if (isOpen) {
-    openReferenceView(referenceElement)
-  } else {
-    closeReferenceView(referenceElement)
-  }
+  const isOpen = referenceElement.classList.toggle("open");
+  (isOpen ? openReferenceView : closeReferenceView)(referenceElement);
 }
 
 function handleHeaderClick(referenceId) {
-  const referenceElement = document.querySelector(`.reference[data-reference-id="${referenceId}"]`)
-
-  toggleReferenceView(referenceElement)
+  const referenceElement = document.querySelector(
+    `.reference[data-reference-id="${referenceId}"]`
+  );
+  toggleReferenceView(referenceElement);
 }
