@@ -6,6 +6,7 @@ from app.config import Config
 from app.models.field import Field
 from app.models.reference import Reference
 from app.controllers import reference_controller
+from app.controllers import project_controller
 from app.services import export_service
 
 
@@ -19,6 +20,7 @@ def setup_suite_test():
     db.drop_tables()
     db.create_tables()
     db.create_session()
+    project_controller.create_default_project()
     yield
     db.close_session()
 

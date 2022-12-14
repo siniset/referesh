@@ -6,6 +6,7 @@ from app.config import Config
 from app.models.field import Field
 from app.models.reference import Reference
 from app.controllers import reference_controller
+from app.controllers import project_controller
 
 
 @fixture(scope="class", autouse=True)
@@ -18,6 +19,7 @@ def setup_suite_test():
     db.drop_tables()
     db.create_tables()
     db.create_session()
+    project_controller.create_default_project()
     yield
     db.close_session()
 
@@ -35,23 +37,23 @@ class TestReferenceController:
         assert 0 == len(db.session.execute(select(Reference)).all())
 
     def test_get_by_id_returns_correct_reference(self):
-        db.session.add(Reference(name="REF_NAME_1", type="book"))
-        db.session.add(Reference(name="REF_NAME_2", type="book"))
-        db.session.add(Reference(name="REF_NAME_3", type="book"))
+        db.session.add(Reference(name="REF_NAME_1", type="book", project_id=1))
+        db.session.add(Reference(name="REF_NAME_2", type="book", project_id=1))
+        db.session.add(Reference(name="REF_NAME_3", type="book", project_id=1))
         db.session.commit()
 
         reference = reference_controller.get_by_id(2)
         assert "REF_NAME_2" == reference.name
 
     def test_get_titles_return_correct_format(self):
-        reference = Reference(name="REF_NAME_1", type="book")
+        reference = Reference(name="REF_NAME_1", type="book", project_id=1)
         reference.fields.append(Field(name="year", content="2000"))
         reference.fields.append(Field(name="title", content="Book Title"))
         reference.fields.append(Field(name="author", content="Book Author"))
 
         db.session.add(reference)
 
-        reference = Reference(name="REF_NAME_2", type="book")
+        reference = Reference(name="REF_NAME_2", type="book", project_id=1)
         reference.fields.append(Field(name="year", content="1000"))
         reference.fields.append(Field(name="title", content="Book Title 2"))
         reference.fields.append(Field(name="author", content="Book Author 2"))
@@ -65,7 +67,7 @@ class TestReferenceController:
         assert references[0].title == "Book Title"
 
     def test_delete_removes_existing_reference(self):
-        reference = Reference(name="REF_NAME_1", type="book")
+        reference = Reference(name="REF_NAME_1", type="book", project_id=1)
         db.session.add(reference)
         db.session.commit()
 
@@ -73,7 +75,7 @@ class TestReferenceController:
         assert 0 == len(reference_controller.get_all())
 
     def test_delete_removes_child_fields(self):
-        reference = Reference(name="REF_NAME_1", type="book")
+        reference = Reference(name="REF_NAME_1", type="book", project_id=1)
         reference.fields.append(Field(name="year", content="2000"))
         reference.fields.append(Field(name="title", content="Book Title"))
         reference.fields.append(Field(name="author", content="Book Author"))
