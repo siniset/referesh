@@ -1,9 +1,22 @@
-# Viitesovellus
 
-![GHA workflow badge](https://github.com/hnenonen/Ohtu_2022/workflows/CI/badge.svg)
-[![codecov](https://codecov.io/gh/hnenonen/Ohtu_2022/branch/main/graph/badge.svg?token=0902d546-2d3a-4f58-8228-4ad52ad2f446)](https://codecov.io/gh/hnenonen/Ohtu_2022)
 
-__[Website](https://viitesovellus.fly.dev/) -- [Backlog](https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing)__
+<h1 align="center">Viitesovellus</h3>
+<b>
+  <p align="center">
+    <a href="https://viitesovellus.fly.dev/">Website</a>
+    ·
+    <a href="https://docs.google.com/spreadsheets/d/1p1A37PK2yHurjrkDhkwlJjbcCk2LaQK1XVaVGVVQgHk/edit?usp=sharing">Backlog</a>
+    ·
+    <a href="docs">Docs</a>
+  </p>
+</b>
+
+<p align="center">
+  <img src="https://github.com/Siniset/Ohtu_2022/workflows/CI/badge.svg" />
+  <a href="https://codecov.io/gh/varvikko/Ohtu_2022">
+    <img src="https://codecov.io/gh/varvikko/Ohtu_2022/branch/main/graph/badge.svg?token=YW4Z0ROFY5)" />
+   </a>
+</p>
 
 __Definition of Done__
 
