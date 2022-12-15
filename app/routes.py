@@ -11,6 +11,7 @@ def index():
     references = reference_controller.get_titles()
     return render_template("index.html", references=references)
 
+
 @app.route("/create_project", methods=["POST"])
 def create_project():
     name = request.form["name"]
@@ -20,6 +21,7 @@ def create_project():
 
     project_controller.create_project(name)
     return redirect("/")
+
 
 @app.route("/references/<reference_id>/fields", methods=["POST"])
 def create_field(reference_id):

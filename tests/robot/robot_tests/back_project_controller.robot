@@ -8,4 +8,3 @@ Test Setup  Go To Main Page
 Create New Project
     Create Project  Testiprojekti
 
-*** Keywords ***

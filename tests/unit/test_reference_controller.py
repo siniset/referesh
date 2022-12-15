@@ -7,7 +7,6 @@ from app.controllers import reference_controller
 from app.controllers import project_controller
 from app.models.field import Field
 from app.models.reference import Reference
-from utils import UnitTest
 
 
 def append_fields(reference, fields):
@@ -16,7 +15,11 @@ def append_fields(reference, fields):
 
 
 def insert_reference(name, type, created_at=None):
-    reference = Reference(name=name, type=type, created_at=created_at, project_id=1)
+    reference = Reference(
+        name=name,
+        type=type,
+        created_at=created_at,
+        project_id=1)
     db.get_session().add(reference)
     return reference
 
@@ -30,7 +33,6 @@ class TestReferenceController:
     def setup_suite(self):
         db.connect()
 
-
     @fixture(scope='function', autouse=True)
     def setup_suite_test(self):
         db.connection.create_tables()
@@ -40,7 +42,6 @@ class TestReferenceController:
         yield
         db.connection.close_session()
         db.connection.drop_tables()
-
 
     def test_create_adds_reference_with_valid_values(self):
         reference_controller.create("BOOKNAME", "book")
