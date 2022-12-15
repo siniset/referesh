@@ -37,13 +37,13 @@ def get_titles():
     )
 
 
-def create(name, type, fields=None):
+def create(name, type, fields=None, project_id=1):
     if len(name) == 0:
         raise ValueError("Viitteen nimi ei voi olla tyhjä")
     if not is_valid_type(type):
         raise ValueError("Viitteen tyyppi on virheellinen")
 
-    reference = Reference(name=name, type=type)
+    reference = Reference(name=name, type=type, project_id=project_id)
 
     if fields:
         for name, content in fields.items():

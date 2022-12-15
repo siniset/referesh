@@ -13,6 +13,23 @@
     </header>
 
     <section class="vertical box">
+        <p class="box-title">Luo projekti</p>
+
+        <form class="vertical form v-gap-xl" action="/create_project" method="POST">
+            <div class="form-row row h-gap-lg">
+                <div class="span-6 vertical flex v-gap-md">
+                    <label for="project-name">Nimi</label>
+                    <input name="name" id="project-name" placeholder="Nimi" type="text" class="text-field" />
+                </div>
+            </div>
+            <div>
+                <input id="project_button" type="submit" class="span-12 button text-bold" value="Luo" />
+            </div>
+        </form>
+
+    </section>
+
+    <section class="vertical box">
         <p class="box-title">Lisää viite</p>
 
         <form class="vertical form v-gap-lg" action="/references" method="POST">
@@ -51,6 +68,15 @@
                 <div class="span-6 vertical flex v-gap-md">
                     <label for="reference-publisher">Julkaisija</label>
                     <input name="publisher" id="reference-publisher" placeholder="Julkaisija" type="text" class="text-field" />
+                </div>
+            </div>
+
+            <div class="form-row row h-gap-lg">
+                <div class="span-6 vertical flex v-gap-md">
+                    <label for="reference-type">Projekti</label>
+                    <select name="type" id="reference-type" class="text-field">
+                        <option name="testi" value="testi">Testi</option>
+                    </select>
                 </div>
             </div>
 

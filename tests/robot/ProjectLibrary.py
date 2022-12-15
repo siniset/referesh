@@ -1,4 +1,4 @@
-from tests.robot.DatabaseLibrary import DatabaseLibrary
+from DatabaseLibrary import DatabaseLibrary
 from app.models.project import Project
 from sqlalchemy import delete, select
 
