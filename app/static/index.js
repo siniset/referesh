@@ -6,8 +6,8 @@ references.forEach((reference) =>
   )
 );
 
-function fetchField(referenceId) {
-  return fetch(`/references/${referenceId}`).then((response) =>
+function fetchFields(referenceId) {
+  return fetch(`/references/${referenceId}/fields`).then((response) =>
     response.json()
   );
 }
@@ -54,11 +54,11 @@ function createFieldElement(field) {
     }),
     deleteButton = makeElement("Poista", {
       textContent: "Poista",
-      classList: "button button-dark badge",
+      classList: "button badge",
     }),
     editButton = makeElement("button", {
       textContent: "Muokkaa",
-      classList: "button button-dark badge",
+      classList: "button badge",
     });
 
   fieldElement.append(nameElement, contentElement, editButton, deleteButton);
@@ -96,23 +96,51 @@ function createFieldElement(field) {
 }
 
 function openReferenceView(referenceElement) {
+  const referenceId = referenceElement.dataset.referenceId
+
   const body = makeElement("div", { classList: "reference-body" }),
     fieldList = makeElement("div", { classList: "field-list v-gap-lg" }),
+    newFieldForm = makeElement("form", {
+      method: "POST",
+      action: `/references/${referenceId}/fields`,
+      classList: "flex add-field-form"
+    }),
     deleteButton = makeElement("button", {
       textContent: "Poista viite",
-      classList: "span-12 button button-dark"
+      classList: "span-12 button dark"
     })
 
+  newFieldForm.append(
+    makeElement("input", {
+      type: "text",
+      name: "name",
+      placeholder: "Kentän tyyppi",
+      classList: "grow text-field",
+    }),
+    makeElement("input", {
+      type: "text",
+      name: "content",
+      placeholder: "Kentän sisältö",
+      classList: "grow text-field",
+    }),
+    makeElement("input", {
+      type: "submit",
+      classList: "button span-2",
+      value: "Lisää kenttä"
+    })
+  )
+
+
   deleteButton.addEventListener("click", () =>
-    deleteReference(referenceElement.dataset.referenceId).then(() =>
+    deleteReference(referenceId).then(() =>
       referenceElement.remove()
     )
   )
 
   referenceElement.appendChild(body);
-  body.append(fieldList, deleteButton);
+  body.append(fieldList, newFieldForm, deleteButton);
 
-  fetchField(referenceElement.dataset.referenceId)
+  fetchFields(referenceElement.dataset.referenceId)
     .then((fields) => fields.filter((field) => field.name !== "title"))
     .then((fields) => fieldList.append(...fields.map(createFieldElement)));
 }

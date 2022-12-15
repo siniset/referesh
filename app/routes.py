@@ -1,7 +1,7 @@
-from flask import render_template, request, redirect, abort, send_file
+from flask import render_template, request, redirect, abort, send_file, jsonify
 from app.app import app
 from app.controllers import reference_controller
-from app.controllers import project_controller
+from app.controllers import field_controller
 from app.services import export_service
 
 
@@ -11,24 +11,42 @@ def index():
     return render_template("index.html", references=references)
 
 
-@app.route("/references/<id>")
-def reference(id):
-    reference = reference_controller.get_by_id(id)
-
-    fields = {}
-    for field in reference.fields:
-        fields[field.name] = field.content
-
-    return fields
-
-
-@app.route("/save", methods=["POST"])
-def save():
+@app.route("/references/<reference_id>/fields", methods=["POST"])
+def create_field(reference_id):
     name = request.form["name"]
-    type = request.form["type"]
+    content = request.form["content"]
 
     if len(name) == 0:
         abort(400)
+    elif len(content) == 0:
+        abort(400)
+
+    field_controller.create(name, content, reference_id)
+    return redirect("/")
+
+
+@app.route("/references/<id>/fields")
+def get_fields(id):
+    return jsonify(field_controller.collect(id))
+
+
+@app.route("/fields/<id>", methods=["PUT"])
+def update_field(id):
+    content = request.json["content"]
+    field_controller.update(id, content)
+    return jsonify({"content": content})
+
+
+@app.route("/fields/<id>", methods=["DELETE"])
+def delete_field(id):
+    field_controller.delete_by_id(id)
+    return jsonify({"id": id})
+
+
+@app.route("/references", methods=["POST"])
+def create_reference():
+    name = request.form["name"]
+    type = request.form["type"]
 
     fields = {
         "author": request.form["author"],
@@ -37,34 +55,14 @@ def save():
         "publisher": request.form["publisher"]
     }
 
-    project_controller.create_default_project()
     reference_controller.create(name, type, fields)
     return redirect("/")
 
 
-@app.route("/create_project", methods=["POST"])
-def create_project():
-    name = request.form["name"]
-
-    if len(name) == 0:
-        abort(400)
-
-    project_controller.create_project(name)
-    return redirect("/")
-
-
-@app.route("/references/edit/<id>", methods=["GET", "PUT"])
-def edit(id):
-    reference_controller.edit(
-        id, "ilari", "book", {
-            "author": "kjfdlkfjl author"})
-    return redirect("/")
-
-
-@app.route("/delete/<id>", methods=["GET", "DELETE"])
-def delete(id):
+@app.route("/references/<id>", methods=["DELETE"])
+def delete_reference(id):
     reference_controller.delete_by_id(id)
-    return redirect("/")
+    return jsonify({"id": id})
 
 
 @app.route("/export")

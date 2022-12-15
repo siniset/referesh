@@ -14,16 +14,13 @@ class ProjectLibrary():
             self.db.session.add(project)
             self.db.session.commit()
 
-
     def get_by_id(self, id):
         return self.db.session.execute(
             select(Project).where(Project.id == id)
         ).scalar_one()
 
-
     def get_all(self):
         return self.db.session.execute(select(Project)).all()
-
 
     def create_project(self, name):
         if len(name) == 0:
@@ -33,7 +30,6 @@ class ProjectLibrary():
 
         self.db.session.add(project)
         self.db.session.commit()
-
 
     def delete_by_id(self, id):
         self.db.session.execute(delete(Project).where(Project.id == id))

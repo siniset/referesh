@@ -19,6 +19,7 @@ def bibtexify_reference(reference):
     bibtex += "}\n\n"
     return bibtex
 
+
 def parse_from_bibtex(file):
     bib_data = parse_file(file)
     bib_dict = bib_data.entries
@@ -29,9 +30,9 @@ def parse_from_bibtex(file):
         title = reference.fields['title']
         year = reference.fields['year']
         publisher = reference.fields['publisher']
-        ref_name = author.split()[0].strip(',')+year
+        ref_name = author.split()[0].strip(',') + year
         reference = [type, ref_name, author, title, year, publisher]
         references.append(reference)
     return references
 
-#print(parse_from_bibtex('test.bib'))      # for testing
+# print(parse_from_bibtex('test.bib'))      # for testing
