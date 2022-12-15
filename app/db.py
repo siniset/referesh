@@ -8,6 +8,7 @@ from app.config import Config
 Base = declarative_base()
 connection = None
 
+
 class DatabaseConnection:
     def create_engine(self, url):
         self.engine = create_engine(url, echo=False)
@@ -42,7 +43,7 @@ def connect(app=None):
         app.config["SQLALCHEMY_DATABASE_URI"] = Config.DATABASE_URL
         connection = SQLAlchemy(app)
         Base = connection.Model
-        
+
 
 def get_session():
     return connection.session

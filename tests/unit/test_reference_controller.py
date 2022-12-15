@@ -44,7 +44,6 @@ class TestReferenceController(UnitTest):
         assert str(err.value) == "Type is unknown"
         assert 0 == len(get_references())
 
-
     def test_get_by_id_returns_correct_reference(self):
         self.session.add_all([
             Reference(name="REF_NAME_1", type="book"),
@@ -58,17 +57,24 @@ class TestReferenceController(UnitTest):
     def test_references_are_ordered_by_most_recent_first(self):
         now = datetime.datetime.now()
 
-        append_fields(insert_reference("non-empty-1", "book", now), [
-            Field(name="year", content="2000"),
-            Field(name="title", content="Book Title"),
-            Field(name="author", content="Book Author")
-        ])
+        append_fields(
+            insert_reference("non-empty-1", "book", now),
+            [
+                Field(name="year", content="2000"),
+                Field(name="title", content="Book Title"),
+                Field(name="author", content="Book Author")
+            ]
+        )
 
-        append_fields(insert_reference("non-empty-2", "book", now + datetime.timedelta(0, 1)), [
-            Field(name="year", content="1000"),
-            Field(name="title", content="Book Title 2"),
-            Field(name="author", content="Book Author 2")
-        ])
+        append_fields(
+            insert_reference("non-empty-2", "book",
+                             now + datetime.timedelta(0, 1)),
+            [
+                Field(name="year", content="1000"),
+                Field(name="title", content="Book Title 2"),
+                Field(name="author", content="Book Author 2"),
+            ]
+        )
 
         insert_reference(name="jdsk", type="book", created_at=now)
         insert_reference(name="REF_NAME_2", type="article",
@@ -103,7 +109,7 @@ class TestReferenceController(UnitTest):
     def test_delete_removes_existing_reference(self):
         insert_reference("ref_name_1", "book")
         self.session.commit()
-        
+
         reference_controller.delete_by_id(1)
         assert 0 == len(reference_controller.get_all())
 
@@ -116,5 +122,5 @@ class TestReferenceController(UnitTest):
 
         self.session.commit()
         reference_controller.delete_by_id(1)
-        
+
         assert 0 == len(get_references())

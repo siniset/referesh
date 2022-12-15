@@ -1,19 +1,18 @@
 from app import db
 from app.models.field import Field
-from app.models.reference import Reference
-from sqlalchemy import select, delete, inspect
+from sqlalchemy import delete
 
 
 def create(name, content, reference_id):
     field = Field(name=name, content=content, reference_id=reference_id)
-    # Reference.query.get(reference_id).fields.append(field)
 
     db.get_session().add(field)
     db.get_session().commit()
 
 
 def update(id, content):
-    db.get_session().query(Field).filter(Field.id == id).update({"content": content})
+    db.get_session().query(Field).filter(
+        Field.id == id).update({"content": content})
     db.get_session().commit()
 
 

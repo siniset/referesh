@@ -25,7 +25,11 @@ def get_all():
 def get_titles():
     return (
         db.get_session().execute(
-            select(Reference.id, Reference.type, Reference.name, Field.content.label("title"))
+            select(
+                Reference.id,
+                Reference.type,
+                Reference.name,
+                Field.content.label("title"))
             .join(Field, isouter=True)
             .filter(Field.name == "title")
             .order_by(Reference.created_at.desc())

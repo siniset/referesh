@@ -11,6 +11,7 @@ def reset_database():
     db.connection.close_session()
     db.connection.drop_tables()
 
+
 class UnitTest:
     @fixture(scope="class", autouse=True)
     def setup_suite(self):
