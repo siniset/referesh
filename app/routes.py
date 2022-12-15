@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, abort, send_file, jsonify
 from app.app import app
 from app.controllers import reference_controller
 from app.controllers import field_controller
+from app.controllers import project_controller
 from app.services import export_service
 
 
@@ -10,6 +11,15 @@ def index():
     references = reference_controller.get_titles()
     return render_template("index.html", references=references)
 
+@app.route("/create_project", methods=["POST"])
+def create_project():
+    name = request.form["name"]
+
+    if len(name) == 0:
+        abort(400)
+
+    project_controller.create_project(name)
+    return redirect("/")
 
 @app.route("/references/<reference_id>/fields", methods=["POST"])
 def create_field(reference_id):
@@ -55,6 +65,7 @@ def create_reference():
         "publisher": request.form["publisher"]
     }
 
+    project_controller.create_default_project()
     reference_controller.create(name, type, fields)
     return redirect("/")
 
