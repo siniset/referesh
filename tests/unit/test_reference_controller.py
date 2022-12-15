@@ -1,9 +1,10 @@
 import datetime
-from pytest import raises
+from pytest import raises, fixture
 from sqlalchemy import select
 
 from app import db
 from app.controllers import reference_controller
+from app.controllers import project_controller
 from app.models.field import Field
 from app.models.reference import Reference
 from utils import UnitTest
@@ -15,7 +16,7 @@ def append_fields(reference, fields):
 
 
 def insert_reference(name, type, created_at=None):
-    reference = Reference(name=name, type=type, created_at=created_at)
+    reference = Reference(name=name, type=type, created_at=created_at, project_id=1)
     db.get_session().add(reference)
     return reference
 
@@ -24,7 +25,23 @@ def get_references():
     return db.get_session().execute(select(Reference)).all()
 
 
-class TestReferenceController(UnitTest):
+class TestReferenceController:
+    @fixture(scope="class", autouse=True)
+    def setup_suite(self):
+        db.connect()
+
+
+    @fixture(scope='function', autouse=True)
+    def setup_suite_test(self):
+        db.connection.create_tables()
+        db.connection.create_session()
+        self.session = db.get_session()
+        project_controller.create_default_project()
+        yield
+        db.connection.close_session()
+        db.connection.drop_tables()
+
+
     def test_create_adds_reference_with_valid_values(self):
         reference_controller.create("BOOKNAME", "book")
         reference_controller.create("ARTNAME", "article")
@@ -46,9 +63,9 @@ class TestReferenceController(UnitTest):
 
     def test_get_by_id_returns_correct_reference(self):
         self.session.add_all([
-            Reference(name="REF_NAME_1", type="book"),
-            Reference(name="REF_NAME_2", type="book"),
-            Reference(name="REF_NAME_3", type="book")
+            Reference(name="REF_NAME_1", type="book", project_id=1),
+            Reference(name="REF_NAME_2", type="book", project_id=1),
+            Reference(name="REF_NAME_3", type="book", project_id=1)
         ])
         self.session.commit()
 
