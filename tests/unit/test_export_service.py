@@ -1,31 +1,10 @@
-from pytest import fixture, raises
-from sqlalchemy import select
-
-from app import db
-from app.config import Config
 from app.models.field import Field
 from app.models.reference import Reference
-from app.controllers import reference_controller
-from app.controllers import project_controller
 from app.services import export_service
+from utils import UnitTest
 
 
-@fixture(scope="class", autouse=True)
-def setup_suite():
-    db.create_database_connection(Config.DATABASE_URL)
-
-
-@fixture(scope='function', autouse=True)
-def setup_suite_test():
-    db.drop_tables()
-    db.create_tables()
-    db.create_session()
-    project_controller.create_default_project()
-    yield
-    db.close_session()
-
-
-class TestExportService:
+class TestExportService(UnitTest):
     def create_book_reference(self):
         reference = Reference(name="Reference1", type="book")
         reference.fields.append(Field(name="author", content="Author"))
@@ -46,15 +25,17 @@ class TestExportService:
         references = self.create_book_reference()
         f = export_service.export_as_bibtex([references])
         content = f.read()
-        assert bytes.decode(
-            content) == "@book{Reference1,\n\tauthor = {Author},\n\ttitle = {Title},\n\tyear = {2000},\n\tpublisher = {Publisher},\n}\n\n"
+        assert bytes.decode(content) == "@book{Reference1,\n\
+\tauthor = {Author},\n\ttitle = {Title},\n\tyear = {2000},\n\
+\tpublisher = {Publisher},\n}\n\n"
 
     def test_article_is_exported_correctly(self):
         references = self.create_article_reference()
         f = export_service.export_as_bibtex([references])
         content = f.read()
         assert bytes.decode(
-            content) == "@article{Test_article,\n\tauthor = {Author},\n\ttitle = {Title},\n\tyear = {2000},\n\tpublisher = {Publisher},\n}\n\n"
+            content) == "@article{Test_article,\n\tauthor = {Author},\n\
+\ttitle = {Title},\n\tyear = {2000},\n\tpublisher = {Publisher},\n}\n\n"
 
     def test_empty_file_is_returned_if_no_references(self):
         f = export_service.export_as_bibtex([])

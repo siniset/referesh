@@ -7,18 +7,18 @@ def create_default_project():
     if not get_all():
         project = Project(name="default")
 
-        db.session.add(project)
-        db.session.commit()
+        db.get_session().add(project)
+        db.get_session().commit()
 
 
 def get_by_id(id):
-    return db.session.execute(
+    return db.get_session().execute(
         select(Project).where(Project.id == id)
     ).scalar_one()
 
 
 def get_all():
-    return db.session.execute(select(Project)).all()
+    return db.get_session().execute(select(Project)).all()
 
 
 def create_project(name):
@@ -27,10 +27,10 @@ def create_project(name):
 
     project = Project(name=name)
 
-    db.session.add(project)
-    db.session.commit()
+    db.get_session().add(project)
+    db.get_session().commit()
 
 
 def delete_by_id(id):
-    db.session.execute(delete(Project).where(Project.id == id))
-    db.session.commit()
+    db.get_session().execute(delete(Project).where(Project.id == id))
+    db.get_session().commit()

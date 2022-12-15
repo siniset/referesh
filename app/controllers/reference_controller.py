@@ -1,52 +1,58 @@
-import logging
 from app import db
 from app.models.reference import Reference
 from app.models.field import Field
 from sqlalchemy import select, delete
 
 
+def is_valid_type(type):
+    # TODO
+    return len(type) > 0
+
+
 def get_by_id(id):
-    return db.session.execute(
+    return db.get_session().execute(
         select(Reference).where(Reference.id == id)
     ).scalar_one()
 
 
 def get_all():
-    return db.session.execute(select(Reference)).all()
+    return db.get_session().execute(
+        select(Reference)
+        .order_by(Reference.created_at.desc())
+    ).scalars().all()
 
 
 def get_titles():
-    return db.session.query(Reference.id, Reference.name, Field.content.label(
-        "title")).select_from(Reference).join(Field).filter(
-            Field.name == "title").all()
+    return (
+        db.get_session().execute(
+            select(
+                Reference.id,
+                Reference.type,
+                Reference.name,
+                Field.content.label("title"))
+            .join(Field, isouter=True)
+            .filter(Field.name == "title")
+            .order_by(Reference.created_at.desc())
+        ).all()
+    )
 
 
-def create(name, type, fields={}, project_id=1):
+def create(name, type, fields=None, project_id=1):
     if len(name) == 0:
         raise ValueError("Name is invalid")
-    if len(type) == 0:
+    if not is_valid_type(type):
         raise ValueError("Type is unknown")
 
     reference = Reference(name=name, type=type, project_id=project_id)
 
-    for name, content in fields.items():
-        reference.fields.append(Field(name=name, content=content))
+    if fields:
+        for name, content in fields.items():
+            reference.fields.append(Field(name=name, content=content))
 
-    db.session.add(reference)
-    db.session.commit()
-
-
-def edit(id, name, type_, fields={}):
-
-    db.session.query(Reference).filter(
-        id == Reference.id).update({'name': name})
-
-    for field_name, field_content in fields.items():
-        db.session.query(Field).filter(Field.reference_id == id).filter(
-            Field.name == field_name).update({"content": field_content})
-    db.session.commit()
+    db.get_session().add(reference)
+    db.get_session().commit()
 
 
 def delete_by_id(id):
-    db.session.execute(delete(Reference).where(Reference.id == id))
-    db.session.commit()
+    db.get_session().execute(delete(Reference).where(Reference.id == id))
+    db.get_session().commit()

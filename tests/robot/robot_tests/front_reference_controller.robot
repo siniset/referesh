@@ -25,11 +25,6 @@ Save Article Reference
     Submit Credentials
     Save Reference Should Succeed
 
-Delete Reference
-    Show Reference
-    Click Delete
-    Main Page Should Be Open
-
 *** Keywords ***
 Save Reference Should Succeed
     Main Page Should Be Open
@@ -67,5 +62,3 @@ Set Reference Publisher
 Show Reference
     Click Element  xpath:/html/body/section[2]/div/div[1]
 
-CLick Delete
-    Click Link  /html/body/section[3]/div[2]/div[1]/div[2]/button

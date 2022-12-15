@@ -6,6 +6,11 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 packages = [{include = "app"}, {include = "tests"}]
 
+[tool.pytest.ini_options]
+pythonpath = [
+  "tests"
+]
+
 [tool.poetry.dependencies]
 python = "^3.8.1"
 invoke = "^1.7.3"

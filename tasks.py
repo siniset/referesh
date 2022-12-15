@@ -9,7 +9,8 @@ pty = sys.platform != "win32"
 
 @task
 def start(ctx):
-    ctx.run("MODE=development flask --app app.app:app --debug run --host=0.0.0.0", pty=pty)
+    ctx.run("MODE=development flask --app app.app:app \
+        --debug run --host=0.0.0.0", pty=pty)
 
 
 @task
@@ -24,7 +25,7 @@ def test(ctx, unit=False, robot=False, all=False):
     elif unit:
         ctx.run("MODE=test python3 -m pytest", pty=pty)
     elif robot:
-        ctx.run(f"""MODE=test robot tests/robot/robot_tests""", pty=pty)
+        ctx.run("MODE=test robot tests/robot/robot_tests", pty=pty)
     else:
         logging.error("No tests specified.")
 

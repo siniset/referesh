@@ -18,4 +18,3 @@ def bibtexify_reference(reference):
         bibtex += "\t" + f"{field.name} = " + "{" + f"{field.content}" + "},\n"
     bibtex += "}\n\n"
     return bibtex
-

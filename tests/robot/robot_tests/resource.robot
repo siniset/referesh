@@ -8,7 +8,7 @@ Library  tests/robot/ReferenceLibrary.py
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
 ${HOME URL}  http://${SERVER}
-${DELAY}  0 seconds
+${DELAY}  0.3 seconds
 
 *** Keywords ***
 Open And Configure Browser
