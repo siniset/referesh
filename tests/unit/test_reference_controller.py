@@ -1,84 +1,120 @@
-from pytest import fixture, raises
+import datetime
+from pytest import raises
 from sqlalchemy import select
 
 from app import db
-from app.config import Config
+from app.controllers import reference_controller
 from app.models.field import Field
 from app.models.reference import Reference
-from app.controllers import reference_controller
+from utils import UnitTest
 
 
-@fixture(scope="class", autouse=True)
-def setup_suite():
-    db.create_database_connection(Config.DATABASE_URL)
+def append_fields(reference, fields):
+    for field in fields:
+        reference.fields.append(field)
 
 
-@fixture(scope='function', autouse=True)
-def setup_suite_test():
-    db.drop_tables()
-    db.create_tables()
-    db.create_session()
-    yield
-    db.close_session()
+def insert_reference(name, type, created_at=None):
+    reference = Reference(name=name, type=type, created_at=created_at)
+    db.get_session().add(reference)
+    return reference
 
 
-class TestReferenceController:
+def get_references():
+    return db.get_session().execute(select(Reference)).all()
+
+
+class TestReferenceController(UnitTest):
     def test_create_adds_reference_with_valid_values(self):
-        reference_controller.create("REFNAME", "Book title")
-        assert 1 == len(db.session.execute(select(Reference)).all())
+        reference_controller.create("BOOKNAME", "book")
+        reference_controller.create("ARTNAME", "article")
+        assert 2 == len(get_references())
 
-    def test_create_fails_with_invalid_values(self):
-        with raises(Exception) as excinfo:
-            reference_controller.create("", "Book title")
+    def test_create_fails_with_invalid_name(self):
+        with raises(ValueError) as err:
+            reference_controller.create("", "book")
 
-        assert str(excinfo.value) == "Name is invalid"
-        assert 0 == len(db.session.execute(select(Reference)).all())
+        assert str(err.value) == "Name is invalid"
+        assert 0 == len(get_references())
+
+    def test_create_fails_with_invalid_type(self):
+        with raises(ValueError) as err:
+            reference_controller.create("ref", "")
+
+        assert str(err.value) == "Type is unknown"
+        assert 0 == len(get_references())
+
 
     def test_get_by_id_returns_correct_reference(self):
-        db.session.add(Reference(name="REF_NAME_1", type="book"))
-        db.session.add(Reference(name="REF_NAME_2", type="book"))
-        db.session.add(Reference(name="REF_NAME_3", type="book"))
-        db.session.commit()
+        self.session.add_all([
+            Reference(name="REF_NAME_1", type="book"),
+            Reference(name="REF_NAME_2", type="book"),
+            Reference(name="REF_NAME_3", type="book")
+        ])
+        self.session.commit()
 
-        reference = reference_controller.get_by_id(2)
-        assert "REF_NAME_2" == reference.name
+        assert "REF_NAME_2" == reference_controller.get_by_id(2).name
+
+    def test_references_are_ordered_by_most_recent_first(self):
+        now = datetime.datetime.now()
+
+        append_fields(insert_reference("non-empty-1", "book", now), [
+            Field(name="year", content="2000"),
+            Field(name="title", content="Book Title"),
+            Field(name="author", content="Book Author")
+        ])
+
+        append_fields(insert_reference("non-empty-2", "book", now + datetime.timedelta(0, 1)), [
+            Field(name="year", content="1000"),
+            Field(name="title", content="Book Title 2"),
+            Field(name="author", content="Book Author 2")
+        ])
+
+        insert_reference(name="jdsk", type="book", created_at=now)
+        insert_reference(name="REF_NAME_2", type="article",
+                         created_at=now + datetime.timedelta(0, 1))
+        insert_reference(name="REF_aaaNAME_3", type="book",
+                         created_at=now + datetime.timedelta(0, 5))
+
+        self.session.commit()
+
+        assert 5 == reference_controller.get_all()[0].id
+        assert 2 == reference_controller.get_titles()[0].id
 
     def test_get_titles_return_correct_format(self):
-        reference = Reference(name="REF_NAME_1", type="book")
-        reference.fields.append(Field(name="year", content="2000"))
-        reference.fields.append(Field(name="title", content="Book Title"))
-        reference.fields.append(Field(name="author", content="Book Author"))
+        append_fields(insert_reference("REF_NAME_1", "book"), [
+            Field(name="year", content="2000"),
+            Field(name="title", content="Book Title"),
+            Field(name="author", content="Book Author")
+        ])
 
-        db.session.add(reference)
+        append_fields(insert_reference("REF_NAME_2", "book"), [
+            Field(name="year", content="1000"),
+            Field(name="title", content="Book Title 2"),
+            Field(name="author", content="Book Author 2")
+        ])
 
-        reference = Reference(name="REF_NAME_2", type="book")
-        reference.fields.append(Field(name="year", content="1000"))
-        reference.fields.append(Field(name="title", content="Book Title 2"))
-        reference.fields.append(Field(name="author", content="Book Author 2"))
-
-        db.session.add(reference)
-
-        db.session.commit()
+        self.session.commit()
         references = reference_controller.get_titles()
 
         assert 2 == len(references)
-        assert references[0].title == "Book Title"
+        assert "Book Title" == references[0].title
 
     def test_delete_removes_existing_reference(self):
-        reference = Reference(name="REF_NAME_1", type="book")
-        db.session.add(reference)
-        db.session.commit()
-
+        insert_reference("ref_name_1", "book")
+        self.session.commit()
+        
         reference_controller.delete_by_id(1)
         assert 0 == len(reference_controller.get_all())
 
-    def test_delete_removes_child_fields(self):
-        reference = Reference(name="REF_NAME_1", type="book")
-        reference.fields.append(Field(name="year", content="2000"))
-        reference.fields.append(Field(name="title", content="Book Title"))
-        reference.fields.append(Field(name="author", content="Book Author"))
-        db.session.add(reference)
-        db.session.commit()
+    def test_delete_removes_associated_fields(self):
+        append_fields(insert_reference("REF_NAME_1", "book"), [
+            Field(name="year", content="2000"),
+            Field(name="title", content="Book Title"),
+            Field(name="author", content="Book Author")
+        ])
 
+        self.session.commit()
         reference_controller.delete_by_id(1)
-        assert 0 == len(db.session.execute(select(Field)).all())
+        
+        assert 0 == len(get_references())

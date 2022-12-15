@@ -1,29 +1,10 @@
-from pytest import fixture, raises
-from sqlalchemy import select
-
-from app import db
-from app.config import Config
 from app.models.field import Field
 from app.models.reference import Reference
-from app.controllers import reference_controller
 from app.services import export_service
+from utils import UnitTest
 
 
-@fixture(scope="class", autouse=True)
-def setup_suite():
-    db.create_database_connection(Config.DATABASE_URL)
-
-
-@fixture(scope='function', autouse=True)
-def setup_suite_test():
-    db.drop_tables()
-    db.create_tables()
-    db.create_session()
-    yield
-    db.close_session()
-
-
-class TestExportService:
+class TestExportService(UnitTest):
     def create_book_reference(self):
         reference = Reference(name="Reference1", type="book")
         reference.fields.append(Field(name="author", content="Author"))

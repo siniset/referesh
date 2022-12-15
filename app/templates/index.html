@@ -15,7 +15,7 @@
     <section class="vertical box">
         <p class="box-title">Lisää viite</p>
 
-        <form class="vertical form v-gap-xl" action="/save" method="POST">
+        <form class="vertical form v-gap-lg" action="/references" method="POST">
             <div class="form-row row h-gap-lg">
                 <div class="span-6 vertical flex v-gap-md">
                     <label for="reference-name">Nimi</label>
@@ -82,10 +82,10 @@
             <div class="reference" data-reference-id={{reference.id}}>
 
                 <div class="row v-centered reference-header">
-                    <div class="column reference-info h-gap-md">
-                        <div class="column"><p class="badge badge-dark">{{reference.name}}</p></div>
-                        <div class="column"><p class="badge">{{reference.type}}</p></div>
-                        <div class="column"><p class="reference-title">{{reference.title}}</p></div>
+                    <div class="column reference-info">
+                        <p class="badge dark">{{reference.name}}</p>
+                        <p class="badge">{{reference.type.upper()}}</p>
+                        <p class="reference-title">{{reference.title}}</p>
                     </div>
 
                     <div class="column reference-button">
