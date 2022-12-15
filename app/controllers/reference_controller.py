@@ -39,15 +39,16 @@ def get_titles():
 
 def create(name, type, fields=None):
     if len(name) == 0:
-        raise ValueError("Name is invalid")
+        raise ValueError("Viitteen nimi ei voi olla tyhjä")
     if not is_valid_type(type):
-        raise ValueError("Type is unknown")
+        raise ValueError("Viitteen tyyppi on virheellinen")
 
     reference = Reference(name=name, type=type)
 
     if fields:
         for name, content in fields.items():
             reference.fields.append(Field(name=name, content=content))
+
 
     db.get_session().add(reference)
     db.get_session().commit()

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --dark-color: #232c46;
+}
+
 body {
   margin: 2rem;
   font-family: sans-serif;
@@ -33,7 +37,7 @@ section:not(:last-child) {
 .box-title {
   padding: 1.333rem;
   font-size: 1.2rem;
-  background-color: #232c46;
+  background-color: var(--dark-color);
   color: #fff;
   font-weight: 600;
 }
@@ -109,6 +113,14 @@ section:not(:last-child) {
   font-size: 0.8rem;
 }
 
+.text-dark {
+  color: var(--dark-color);
+}
+
+.text-light {
+  color: #99aaaa;
+}
+
 a.button {
   display: block;
 }
@@ -125,7 +137,7 @@ a.button {
 
 .button.dark,
 .badge.dark {
-  background-color: #232c46;
+  background-color: var(--dark-color);
   color: #fff;
 }
 
@@ -137,7 +149,7 @@ a.button {
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  color: #232c46;
+  color: var(--dark-color);
   margin: 3rem;
 }
 
@@ -213,4 +225,12 @@ a.button {
 .add-field-form {
   display: flex;
   gap: 1rem;
+}
+
+.error-body {
+  padding: 1.333rem;
+}
+
+.error-message {
+  margin-bottom: 1rem; 
 }

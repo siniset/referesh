@@ -4,8 +4,10 @@ from sqlalchemy import delete
 
 
 def create(name, content, reference_id):
-    field = Field(name=name, content=content, reference_id=reference_id)
+    if len(name) == 0:
+        raise ValueError("Kentän tyyppi ei voi olla tyhjä")
 
+    field = Field(name=name, content=content, reference_id=reference_id)
     db.get_session().add(field)
     db.get_session().commit()
 

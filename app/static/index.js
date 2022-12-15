@@ -47,10 +47,12 @@ function createFieldElement(field) {
     nameElement = makeElement("div", {
       textContent: name[0].toUpperCase() + name.slice(1) + ":",
       classList: "text-bold",
-    }),
-    contentElement = makeElement("div", {
-      textContent: content,
-      classList: "grow field-content",
+    })
+
+  const isEmpty = !(content && content.length > 0)
+  const contentElement = makeElement("div", {
+      textContent: isEmpty ? "n/a" : content,
+      classList: `grow field-content ${isEmpty ? "text-light" : ""}`
     }),
     deleteButton = makeElement("Poista", {
       textContent: "Poista",

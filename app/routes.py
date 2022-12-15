@@ -16,12 +16,8 @@ def create_field(reference_id):
     name = request.form["name"]
     content = request.form["content"]
 
-    if len(name) == 0:
-        abort(400)
-    elif len(content) == 0:
-        abort(400)
-
     field_controller.create(name, content, reference_id)
+
     return redirect("/")
 
 
@@ -70,3 +66,11 @@ def export():
     references = reference_controller.get_all()
     bibtex_file = export_service.export_as_bibtex(references)
     return send_file(bibtex_file, download_name="references.bib")
+
+@app.errorhandler(404)
+def handle_404(e):
+    return render_template("error.html", code=404, message="Sivua ei löydy")
+
+@app.errorhandler(ValueError)
+def handler_bad_request(e):
+    return render_template("error.html", code=400, message=e)

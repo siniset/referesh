@@ -1,3 +1,15 @@
 <!DOCTYPE html>
 
-Error
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Viitesovellus</title>
+</head>
+
+<section class="vertical box">
+  <p class="box-title">Virhe: {{code}}</p>
+  <div class="error-body text-dark vertical flex">
+    <div class="error-message"><span class="text-bold">Tapahtui virhe:</span> {{message}}</div>
+    <a href="/" class="button dark text-bold">Takaisin<a>
+   </div>
+</section>
