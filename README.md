@@ -18,10 +18,16 @@
    </a>
 </p>
 
-__Definition of Done__
 
-Toteutetun User storyn toiminnallisuus on ohjelmoitu ja viety tuotantoon. 
-Testikattavuus on 90%, testitapaukset ovat mielekkäitä. 
-Testit menevät läpi. Pylint ei havaitse koodissa virheitä.
 
-## Usage
+[Testausdokumentti](documentation/testing.md)
+
+[Definition of done](documentation/DoD.md)
+
+[Asennusohjeet lokaalisti](documentation/installation.md)
+
+## Käyttöohje
+
+Sovellusta voi käyttää joko [netissä](https://viitesovellus.fly.dev/) tai lokaalisti asennusohjeiden mukaan. 
+
+Testaamisen käyttöohjeet löytyvät sen omasta ylempää löytyvästä testausdokumentaatiosta.

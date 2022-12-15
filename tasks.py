@@ -29,7 +29,9 @@ def test(ctx, unit=False, robot=False, all=False):
     else:
         logging.error("No tests specified.")
 
-
+@task
+def test_win(ctx):
+    ctx.run("python -m pytest")
 @task
 def run_test_server(ctx):
     ctx.run("""sudo docker run --name ohtu-test-runner -p 5432:5432
