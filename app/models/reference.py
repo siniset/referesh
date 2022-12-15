@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Text, DateTime, ForeignKey, func
+from sqlalchemy import Column, Integer, Text, DateTime, func
 from sqlalchemy.orm import relationship
 from app.db import Base
 
@@ -16,10 +16,4 @@ class Reference(Base):
         DateTime(
             timezone=True),
         server_default=func.now())
-    project_id = Column(
-        Integer,
-        ForeignKey(
-            "Project.id",
-            ondelete="CASCADE"),
-        nullable=False)
     fields = relationship("Field")
