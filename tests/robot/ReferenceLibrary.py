@@ -17,9 +17,10 @@ class ReferenceLibrary():
         return self.db.session.execute(select(Reference)).all()
 
     def get_titles(self):
-        return self.db.session.query(Reference.id, Reference.name, Field.content.label(
-            "title")).select_from(Reference).join(Field).filter(
-                Field.name == "title").all()
+        return self.db.session.query(
+            Reference.id, Reference.name,
+            Field.content.label("title")).select_from(Reference).join(
+            Field).filter(Field.name == "title").all()
 
     def create(self, name, type, fields={}, project_id=1):
         if len(name) == 0:
@@ -54,6 +55,3 @@ class ReferenceLibrary():
             fields[field.name] = field.content
 
         return fields
-
-    def count_references(self):
-        return len(self.get_titles())
