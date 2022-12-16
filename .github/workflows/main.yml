@@ -42,3 +42,8 @@ jobs:
         name: Send coverage report to Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        if: ${{ github.event_name  == 'push' }}
+      - run: flyctl deploy --remote-only
+        if: ${{ github.event_name  == 'push' }}
