@@ -42,4 +42,3 @@ jobs:
         name: Send coverage report to Codecov
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
