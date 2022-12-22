@@ -27,7 +27,7 @@ Testaamisen käyttöohjeet löytyvät sen omasta ylempää löytyvästä testaus
 
 ## Muu dokumentaatio
 
-[Loopuraportti](documentation/report.md)
+[Loppuraportti](documentation/report.md)
 
 [Testausdokumentti](documentation/testing.md)
 
